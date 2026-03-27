@@ -1,0 +1,22 @@
+{
+  "cascade": {
+    "mean_ndcg": 0.9888952714470621,
+    "std_ndcg": 0.04130128374725842,
+    "num_queries": 83
+  },
+  "rrf": {
+    "mean_ndcg": 0.991032401174494,
+    "std_ndcg": 0.03725836937906464,
+    "num_queries": 83
+  },
+  "borda": {
+    "mean_ndcg": 0.9925343422131381,
+    "std_ndcg": 0.027575522732635305,
+    "num_queries": 83
+  },
+  "combmnz": {
+    "mean_ndcg": 0.9895985755804035,
+    "std_ndcg": 0.028104849597019387,
+    "num_queries": 83
+  }
+}

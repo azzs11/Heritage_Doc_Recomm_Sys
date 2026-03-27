@@ -14,6 +14,8 @@ Uses spaCy for NLP and classification schemas from metadata extraction.
 
 import spacy
 import re
+import json
+import os
 from typing import Dict, List, Set
 from sentence_transformers import SentenceTransformer
 import numpy as np
@@ -55,12 +57,20 @@ class QueryProcessor:
         'pallava', 'chola', 'indo-saracenic'
     }
 
-    def __init__(self, embedding_model_name: str = 'all-MiniLM-L6-v2'):
+    # Default gazetteer path — relative to project root
+    GAZETTEER_PATH = "data/gazetteer/heritage_gazetteer.json"
+
+    def __init__(
+        self,
+        embedding_model_name: str = 'all-MiniLM-L6-v2',
+        gazetteer_path: str = None,
+    ):
         """
         Initialize query processor.
 
         Args:
             embedding_model_name: Name of sentence transformer model
+            gazetteer_path: Path to heritage_gazetteer.json (optional override)
         """
         print(f"Loading spaCy model...")
         try:
@@ -73,7 +83,65 @@ class QueryProcessor:
 
         print(f"Loading embedding model: {embedding_model_name}...")
         self.embedding_model = SentenceTransformer(embedding_model_name)
+
+        # Load gazetteer for high-recall entity lookup
+        gaz_path = gazetteer_path or self.GAZETTEER_PATH
+        self._gaz_locations: dict = {}      # lower surface → canonical
+        self._gaz_persons: dict = {}
+        self._gaz_organizations: dict = {}
+        self._gaz_monuments: dict = {}
+        self._load_gazetteer(gaz_path)
+
         print("Query processor initialized successfully!")
+
+    def _load_gazetteer(self, path: str) -> None:
+        """Load the heritage gazetteer and build fast lookup dicts keyed by lowercase surface forms."""
+        if not os.path.exists(path):
+            print(f"Gazetteer not found at {path} — entity lookup will rely on spaCy only.")
+            return
+        with open(path, "r", encoding="utf-8") as f:
+            entries = json.load(f)
+        bucket_map = {
+            "location":     self._gaz_locations,
+            "person":       self._gaz_persons,
+            "organization": self._gaz_organizations,
+            "monument":     self._gaz_monuments,
+        }
+        for entry in entries:
+            etype = entry.get("entity_type")
+            bucket = bucket_map.get(etype)
+            if bucket is None:
+                continue
+            canonical = entry["canonical"]
+            # Index by canonical (lower) and all known aliases
+            surfaces = [canonical] + entry.get("aliases", [])
+            for s in surfaces:
+                key = s.strip().lower()
+                if key and key not in bucket:
+                    bucket[key] = canonical
+        total = sum(len(b) for b in bucket_map.values())
+        print(f"Gazetteer loaded: {total} surface forms across {len(entries)} entries")
+
+    def _gazetteer_lookup(self, query_lower: str) -> Dict[str, List[str]]:
+        """Scan query text for gazetteer matches (longest-match, greedy left-to-right)."""
+        hits: Dict[str, List[str]] = {
+            "locations": [], "persons": [], "organizations": [], "monuments": []
+        }
+        buckets = [
+            (self._gaz_locations,     "locations"),
+            (self._gaz_persons,       "persons"),
+            (self._gaz_organizations, "organizations"),
+            (self._gaz_monuments,     "monuments"),
+        ]
+        for bucket, key in buckets:
+            seen = set()
+            for surface, canonical in bucket.items():
+                # whole-word boundary match
+                if re.search(r'\b' + re.escape(surface) + r'\b', query_lower):
+                    if canonical.lower() not in seen:
+                        seen.add(canonical.lower())
+                        hits[key].append(canonical)
+        return hits
 
     def parse_query(self, query_text: str) -> Dict:
         """
@@ -170,6 +238,29 @@ class QueryProcessor:
                 parsed['persons'].append(ent.text)
             elif ent.label_ == 'ORG':
                 parsed['organizations'].append(ent.text)
+
+        # Augment with gazetteer lookup (fills gaps spaCy misses)
+        gaz_hits = self._gazetteer_lookup(query_lower)
+        seen_locs = {l.lower() for l in parsed['locations']}
+        seen_pers = {p.lower() for p in parsed['persons']}
+        seen_orgs = {o.lower() for o in parsed['organizations']}
+        for loc in gaz_hits['locations']:
+            if loc.lower() not in seen_locs:
+                parsed['locations'].append(loc)
+                seen_locs.add(loc.lower())
+        for per in gaz_hits['persons']:
+            if per.lower() not in seen_pers:
+                parsed['persons'].append(per)
+                seen_pers.add(per.lower())
+        for org in gaz_hits['organizations']:
+            if org.lower() not in seen_orgs:
+                parsed['organizations'].append(org)
+                seen_orgs.add(org.lower())
+        # Monuments feed into heritage_types and locations
+        for mon in gaz_hits['monuments']:
+            if mon.lower() not in seen_locs:
+                parsed['locations'].append(mon)
+                seen_locs.add(mon.lower())
 
         # Generate query embedding
         parsed['query_embedding'] = self.embedding_model.encode(

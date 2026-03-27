@@ -5,6 +5,7 @@ Extracts comprehensive features for each query-document pair to enable
 ML-based ranking optimization.
 """
 
+import os
 import numpy as np
 from typing import Dict, List, Tuple, Set
 from dataclasses import dataclass
@@ -362,12 +363,49 @@ class FeatureExtractor:
         return 0
 
 
+def _get_relevance_label_from_gt(query_data: dict, doc_id: str) -> int:
+    """
+    Extract relevance label from a GT query, handling both v1 and v2.0 formats.
+
+    v1 format:  query_data['annotations'] = [{'doc_id': 'doc_12', 'relevance': 3}, ...]
+    v2.0 format: query_data['relevance_judgments'] = {'12': [{'relevance_level': 3, ...}], ...}
+
+    Args:
+        query_data: Single query dict from ground truth
+        doc_id: Document node ID in the form "doc_N"
+
+    Returns:
+        Relevance label (0-3) or -1 if not annotated
+    """
+    # v2.0 format: relevance_judgments keyed by numeric string
+    if 'relevance_judgments' in query_data:
+        # doc_id is "doc_12" → key is "12"
+        numeric_key = doc_id.replace('doc_', '') if doc_id.startswith('doc_') else doc_id
+        judgments = query_data['relevance_judgments'].get(numeric_key, [])
+        if judgments:
+            # Average across annotators, round to int
+            levels = [j['relevance_level'] for j in judgments if 'relevance_level' in j]
+            if levels:
+                return round(sum(levels) / len(levels))
+        return -1
+
+    # v1 format: annotations list
+    for annotation in query_data.get('annotations', []):
+        ann_doc = annotation.get('doc_id', '')
+        # Support "doc_12", "12", or 12 as doc identifier
+        if str(ann_doc) == doc_id or str(ann_doc) == doc_id.replace('doc_', ''):
+            return annotation.get('relevance', -1)
+
+    return -1
+
+
 def create_training_dataset(ground_truth_file: str,
                            recommender_results_file: str,
                            feature_extractor: FeatureExtractor,
                            output_file: str):
     """
-    Create training dataset from ground truth and recommender results
+    Create training dataset from ground truth and recommender results.
+    Supports both v1 (annotations list) and v2.0 (relevance_judgments dict) GT formats.
 
     Args:
         ground_truth_file: Ground truth annotations with relevance labels
@@ -386,32 +424,35 @@ def create_training_dataset(ground_truth_file: str,
     for query_data in ground_truth['queries']:
         query_id = query_data['query_id']
         query_text = query_data['query_text']
+
+        # Build entity list from structured GT fields (v2.0) or explicit entities (v1)
         query_entities = query_data.get('entities', [])
+        for field in ('heritage_types', 'domains'):
+            query_entities = query_entities + query_data.get(field, [])
 
         # Get recommender results for this query
         results = recommender_results.get(query_id, {})
+        if not results:
+            print(f"Warning: no recommender results for query '{query_id}', skipping")
+            continue
 
-        # Extract features for each query-document pair
-        for doc_result in results.get('documents', []):
+        doc_results = results.get('documents', [])
+
+        # Pre-compute score lists for normalization
+        all_scores = {
+            'simrank': [d['simrank_score'] for d in doc_results],
+            'horn': [d['horn_score'] for d in doc_results],
+            'embedding': [d['embedding_score'] for d in doc_results],
+        }
+
+        for doc_result in doc_results:
             doc_id = doc_result['doc_id']
 
-            # Get relevance label from ground truth
-            relevance = -1
-            for annotation in query_data.get('annotations', []):
-                if annotation['doc_id'] == doc_id:
-                    relevance = annotation['relevance']
-                    break
+            relevance = _get_relevance_label_from_gt(query_data, doc_id)
 
             # Skip if no label
             if relevance == -1:
                 continue
-
-            # Collect all scores for normalization
-            all_scores = {
-                'simrank': [d['simrank_score'] for d in results['documents']],
-                'horn': [d['horn_score'] for d in results['documents']],
-                'embedding': [d['embedding_score'] for d in results['documents']]
-            }
 
             # Extract features
             features = feature_extractor.extract_features(
@@ -429,6 +470,7 @@ def create_training_dataset(ground_truth_file: str,
             training_samples.append(features)
 
     # Save training data
+    os.makedirs(os.path.dirname(output_file) if os.path.dirname(output_file) else '.', exist_ok=True)
     with open(output_file, 'wb') as f:
         pickle.dump(training_samples, f)
 

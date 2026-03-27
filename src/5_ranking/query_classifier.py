@@ -199,7 +199,7 @@ def create_synthetic_training_data() -> Tuple[List[str], List[List[str]], List[i
         (queries, entities_list, labels)
     """
     training_data = [
-        # Simple keyword (0)
+        # ── Simple keyword (0) ────────────────────────────────────────────────
         ("mughal forts", ["mughal forts"], 0),
         ("taj mahal", ["taj mahal"], 0),
         ("temples", ["temples"], 0),
@@ -210,8 +210,18 @@ def create_synthetic_training_data() -> Tuple[List[str], List[List[str]], List[i
         ("historical places", ["historical places"], 0),
         ("indian forts", ["indian forts"], 0),
         ("rajasthan palaces", ["rajasthan palaces"], 0),
+        ("cave temples", ["cave temples"], 0),
+        ("stone carvings", ["stone carvings"], 0),
+        ("water stepwells", ["water stepwells"], 0),
+        ("bronze sculptures", ["bronze sculptures"], 0),
+        ("mural paintings", ["mural paintings"], 0),
+        ("inscriptions", ["inscriptions"], 0),
+        ("colonial buildings", ["colonial buildings"], 0),
+        ("medieval ruins", ["medieval ruins"], 0),
+        ("south india temples", ["south india temples"], 0),
+        ("ancient stupas", ["ancient stupas"], 0),
 
-        # Entity-focused (1)
+        # ── Entity-focused (1) ────────────────────────────────────────────────
         ("red fort delhi", ["red fort", "delhi"], 1),
         ("qutub minar architecture", ["qutub minar"], 1),
         ("akbar emperor", ["akbar"], 1),
@@ -222,8 +232,18 @@ def create_synthetic_training_data() -> Tuple[List[str], List[List[str]], List[i
         ("sanchi stupa history", ["sanchi stupa"], 1),
         ("golconda fort hyderabad", ["golconda fort", "hyderabad"], 1),
         ("meenakshi temple madurai", ["meenakshi temple", "madurai"], 1),
+        ("ellora caves aurangabad", ["ellora caves", "aurangabad"], 1),
+        ("fatehpur sikri akbar", ["fatehpur sikri", "akbar"], 1),
+        ("brihadeeswara temple thanjavur", ["brihadeeswara temple", "thanjavur"], 1),
+        ("humayun tomb delhi", ["humayun tomb", "delhi"], 1),
+        ("sun temple modhera", ["sun temple", "modhera"], 1),
+        ("mahabodhi temple bodhgaya", ["mahabodhi temple", "bodhgaya"], 1),
+        ("rani ki vav patan", ["rani ki vav", "patan"], 1),
+        ("charminar hyderabad", ["charminar", "hyderabad"], 1),
+        ("agra fort akbar", ["agra fort", "akbar"], 1),
+        ("victoria memorial kolkata", ["victoria memorial", "kolkata"], 1),
 
-        # Concept-focused (2)
+        # ── Concept-focused (2) ───────────────────────────────────────────────
         ("indo-islamic architecture", ["indo-islamic architecture"], 2),
         ("dravidian temple style", ["dravidian temple style"], 2),
         ("mughal architectural heritage", ["mughal architectural heritage"], 2),
@@ -234,8 +254,18 @@ def create_synthetic_training_data() -> Tuple[List[str], List[List[str]], List[i
         ("hoysala dynasty temples", ["hoysala dynasty"], 2),
         ("stepwell architecture", ["stepwell architecture"], 2),
         ("chola bronze art", ["chola bronze art"], 2),
+        ("nagara temple architecture style", ["nagara temple style"], 2),
+        ("vimana tower design", ["vimana tower"], 2),
+        ("gupta period sculpture", ["gupta period sculpture"], 2),
+        ("jain temple art heritage", ["jain temple art"], 2),
+        ("pallava dynasty rock temples", ["pallava dynasty"], 2),
+        ("maratha military architecture", ["maratha military architecture"], 2),
+        ("indo-saracenic revival style", ["indo-saracenic revival"], 2),
+        ("chalukya temple heritage", ["chalukya temple"], 2),
+        ("rashtrakuta cave art", ["rashtrakuta cave art"], 2),
+        ("ancient trade route heritage", ["ancient trade route"], 2),
 
-        # Complex NLP (3)
+        # ── Complex NLP (3) ───────────────────────────────────────────────────
         ("what are the main features of mughal architecture", ["mughal architecture"], 3),
         ("how did the vijayanagara empire influence temple construction", ["vijayanagara empire"], 3),
         ("which monuments in delhi were built by shah jahan", ["delhi", "shah jahan"], 3),
@@ -246,6 +276,16 @@ def create_synthetic_training_data() -> Tuple[List[str], List[List[str]], List[i
         ("how are rock-cut temples different from structural temples", ["rock-cut temples", "structural temples"], 3),
         ("which unesco world heritage sites are located in rajasthan", ["unesco world heritage sites", "rajasthan"], 3),
         ("what role did the chola dynasty play in temple architecture", ["chola dynasty"], 3),
+        ("how did colonial rule affect the preservation of indian monuments", ["colonial rule", "indian monuments"], 3),
+        ("what is the significance of the stepwells in rajasthan water management", ["stepwells", "rajasthan"], 3),
+        ("which ancient universities in india are considered heritage sites", ["ancient universities", "india"], 3),
+        ("how did the gupta empire contribute to cave temple art", ["gupta empire", "cave temple art"], 3),
+        ("why were the fatehpur sikri buildings abandoned so soon after construction", ["fatehpur sikri"], 3),
+        ("what influence did greek art have on gandhara sculpture", ["greek art", "gandhara sculpture"], 3),
+        ("how does the brihadeeswara temple demonstrate chola engineering", ["brihadeeswara temple", "chola engineering"], 3),
+        ("which monuments show the transition from buddhist to hindu architecture", ["buddhist", "hindu architecture"], 3),
+        ("what materials were used in building the ancient stone temples of south india", ["stone temples", "south india"], 3),
+        ("how did irrigation systems influence the settlement patterns around heritage sites", ["irrigation systems", "heritage sites"], 3),
     ]
 
     queries = [q for q, _, _ in training_data]

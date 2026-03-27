@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --parchment: #f5ebe0;
+  --brown: #8b5e3c;
+  --brown-dark: #4a2c17;
+  --brown-medium: #6b4226;
+  --gold: #c8a84b;
+}
+
+body {
+  background-color: var(--parchment);
+  color: var(--brown-dark);
+}
+
+@layer components {
+  .heritage-card {
+    @apply bg-parchment-100 border border-parchment-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-heritage-brown hover:bg-heritage-medium text-white font-semibold px-5 py-2 rounded transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply border border-heritage-brown text-heritage-brown hover:bg-parchment-200 px-5 py-2 rounded transition-colors duration-200;
+  }
+
+  .section-title {
+    @apply font-serif text-xl font-bold text-heritage-dark border-b border-parchment-200 pb-2 mb-4;
+  }
+}

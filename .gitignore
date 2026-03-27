@@ -448,5 +448,18 @@ MODERN_UI_TRANSFORMATION_GUIDE.md
 !**/README.md
 
 # ============================================================================
+# NEXT.JS FRONTEND
+# ============================================================================
+frontend/.next/
+frontend/node_modules/
+frontend/.env*.local
+frontend/out/
+frontend/build/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.pnpm-debug.log*
+
+# ============================================================================
 # END OF .gitignore
 # ============================================================================

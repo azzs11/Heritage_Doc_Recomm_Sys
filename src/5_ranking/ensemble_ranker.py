@@ -122,19 +122,21 @@ class EnsembleRanker:
         embedding_ranking = {doc.doc_id: rank for rank, doc in enumerate(
             sorted(documents, key=lambda d: d.embedding_score, reverse=True), 1)}
 
+        # Build LTR ranking once if any document has a non-zero LTR score
+        has_ltr = any(doc.ltr_score > 0 for doc in documents)
+        ltr_ranking = {}
+        if has_ltr:
+            ltr_ranking = {doc.doc_id: rank for rank, doc in enumerate(
+                sorted(documents, key=lambda d: d.ltr_score, reverse=True), 1)}
+
         # Compute RRF scores
         for doc in documents:
             rrf_score = 0.0
             rrf_score += 1.0 / (k + simrank_ranking.get(doc.doc_id, 1000))
             rrf_score += 1.0 / (k + horn_ranking.get(doc.doc_id, 1000))
             rrf_score += 1.0 / (k + embedding_ranking.get(doc.doc_id, 1000))
-
-            # Include LTR if available
-            if doc.ltr_score > 0:
-                ltr_ranking = {d.doc_id: r for r, d in enumerate(
-                    sorted(documents, key=lambda d: d.ltr_score, reverse=True), 1)}
+            if has_ltr:
                 rrf_score += 1.0 / (k + ltr_ranking.get(doc.doc_id, 1000))
-
             doc.final_score = rrf_score
 
         # Sort by RRF score
@@ -171,19 +173,21 @@ class EnsembleRanker:
         embedding_ranking = {doc.doc_id: n - rank for rank, doc in enumerate(
             sorted(documents, key=lambda d: d.embedding_score, reverse=True))}
 
+        # Build LTR Borda ranking once if any document has a non-zero LTR score
+        has_ltr = any(doc.ltr_score > 0 for doc in documents)
+        ltr_ranking = {}
+        if has_ltr:
+            ltr_ranking = {doc.doc_id: n - rank for rank, doc in enumerate(
+                sorted(documents, key=lambda d: d.ltr_score, reverse=True))}
+
         # Sum Borda points
         for doc in documents:
             borda_score = 0.0
             borda_score += simrank_ranking.get(doc.doc_id, 0)
             borda_score += horn_ranking.get(doc.doc_id, 0)
             borda_score += embedding_ranking.get(doc.doc_id, 0)
-
-            # Include LTR if available
-            if doc.ltr_score > 0:
-                ltr_ranking = {d.doc_id: n - r for r, d in enumerate(
-                    sorted(documents, key=lambda d: d.ltr_score, reverse=True))}
+            if has_ltr:
                 borda_score += ltr_ranking.get(doc.doc_id, 0)
-
             doc.final_score = borda_score
 
         # Sort by Borda score
@@ -213,25 +217,30 @@ class EnsembleRanker:
         simrank_scores = [d.simrank_score for d in documents]
         horn_scores = [d.horn_score for d in documents]
         embedding_scores = [d.embedding_score for d in documents]
+        ltr_scores = [d.ltr_score for d in documents]
 
         simrank_max = max(simrank_scores) if simrank_scores else 1.0
         horn_max = max(horn_scores) if horn_scores else 1.0
         embedding_max = max(embedding_scores) if embedding_scores else 1.0
+        ltr_max = max(ltr_scores) if ltr_scores else 0.0
+        has_ltr = ltr_max > 0
 
         for doc in documents:
             # Normalized scores
             norm_simrank = doc.simrank_score / simrank_max if simrank_max > 0 else 0
             norm_horn = doc.horn_score / horn_max if horn_max > 0 else 0
             norm_embedding = doc.embedding_score / embedding_max if embedding_max > 0 else 0
+            norm_ltr = doc.ltr_score / ltr_max if has_ltr else 0.0
 
             # Sum of scores
-            score_sum = norm_simrank + norm_horn + norm_embedding
+            score_sum = norm_simrank + norm_horn + norm_embedding + norm_ltr
 
             # Count non-zero systems
             non_zero_count = sum([
                 norm_simrank > 0.01,
                 norm_horn > 0.01,
-                norm_embedding > 0.01
+                norm_embedding > 0.01,
+                norm_ltr > 0.01,
             ])
 
             # CombMNZ score
@@ -331,17 +340,15 @@ def compare_fusion_methods(documents: List[RankedDocument],
         ranker = EnsembleRanker(fusion_method=method)
         ranked_docs = ranker.rank(documents.copy())
 
-        # Get relevance in ranked order
-        ranked_doc_ids = [d.doc_id for d in ranked_docs[:10]]
-        y_pred = np.array([ground_truth_relevance.get(doc_id, 0) for doc_id in ranked_doc_ids])
+        # Build score array aligned to original doc order
+        ranked_order = {d.doc_id: rank for rank, d in enumerate(ranked_docs)}
+        # y_pred: higher score = earlier rank = more relevant; invert rank
+        n = len(doc_ids_original)
+        y_pred = np.array([n - ranked_order.get(doc_id, n) for doc_id in doc_ids_original], dtype=float)
 
         # Compute NDCG@10
         if len(y_pred) > 0:
-            # Reshape for sklearn
-            y_true_reshaped = y_true.reshape(1, -1)
-            y_pred_reshaped = y_pred.reshape(1, -1)
-
-            ndcg = ndcg_score(y_true_reshaped, y_pred_reshaped, k=10)
+            ndcg = ndcg_score(y_true.reshape(1, -1), y_pred.reshape(1, -1), k=min(10, n))
             results[method] = ndcg
         else:
             results[method] = 0.0

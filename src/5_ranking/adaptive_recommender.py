@@ -45,14 +45,14 @@ class AdaptiveRecommender:
             use_ensemble: Whether to use ensemble ranking
             ensemble_method: Ensemble method ('rrf', 'cascade', 'borda', 'combmnz', 'adaptive')
         """
-        self.classifier = None
         self.ranker = None
         self.use_ensemble = use_ensemble
         self.ensemble_method = ensemble_method
 
-        # Load models if available
+        # Always initialise the classifier so predict() is always callable.
+        # load() sets is_trained=True; without it predict() falls back to rule-based.
+        self.classifier = QueryTypeClassifier()
         if os.path.exists(classifier_path):
-            self.classifier = QueryTypeClassifier()
             self.classifier.load(classifier_path)
             print(f"Loaded query classifier from: {classifier_path}")
         else:
@@ -107,15 +107,8 @@ class AdaptiveRecommender:
                 'embedding': 0.3
             }
 
-        # Classify query type
-        if self.classifier:
-            query_type_id, query_type, confidence = self.classifier.predict(query_text, query_entities)
-        else:
-            # Use rule-based classification
-            classifier_temp = QueryTypeClassifier()
-            query_type_id, query_type, confidence = classifier_temp._rule_based_classification(
-                query_text, query_entities
-            )
+        # Classify query type (falls back to rule-based if not trained)
+        query_type_id, query_type, confidence = self.classifier.predict(query_text, query_entities)
 
         # Get learned weights
         if self.ranker and self.ranker.is_trained:
