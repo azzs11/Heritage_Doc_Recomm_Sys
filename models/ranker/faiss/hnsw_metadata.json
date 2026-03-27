@@ -1,10 +1,10 @@
 {
   "index_type": "hnsw",
-  "num_vectors": 369,
+  "num_vectors": 1781,
   "dimension": 384,
   "metric": "inner_product",
   "normalized": true,
-  "created_at": "2025-11-28T21:21:54.685895",
+  "created_at": "2026-03-28T03:19:49.609868",
   "index_params": {
     "M": 32,
     "efConstruction": 200,

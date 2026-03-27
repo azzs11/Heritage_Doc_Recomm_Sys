@@ -1,0 +1,3 @@
+Worldwide occurrence
+Saltmarshes across 99 countries (essentially worldwide) were mapped by Mcowen et al. 2017.
+Saltmarshes across 99 countries (essentially worldwide) were mapped by Mcowen et al. 2017. A total of 5,495,089 hectares of mapped saltmarsh across 43 countries and territories are represented in a Geographic Information Systems polygon shapefile. This estimate is at the relatively low end of previous estimates (2.2–40 Mha). A later study conservatively estimated global saltmarsh extent as 90,800 km2 (9,080,000 hectares). The most extensive saltmarshes worldwide are found outside the tropics, notably including the low-lying, ice-free coasts, bays and estuaries of the North Atlantic which are well represented in their global polygon dataset.

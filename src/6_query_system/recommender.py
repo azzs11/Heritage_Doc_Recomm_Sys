@@ -70,7 +70,7 @@ class HeritageRecommender:
         self.embeddings = np.load(embeddings_path)
 
         print("Loading metadata...")
-        with open(metadata_path, 'r') as f:
+        with open(metadata_path, 'r', encoding='utf-8') as f:
             self.metadata = json.load(f)
 
         print("Loading FAISS index...")
@@ -80,7 +80,7 @@ class HeritageRecommender:
         self.horn_weights = {}
         if Path(horn_weights_path).exists():
             print("Loading Horn's Index weights...")
-            with open(horn_weights_path, 'r') as f:
+            with open(horn_weights_path, 'r', encoding='utf-8') as f:
                 self.horn_weights = json.load(f)
         else:
             print("Warning: Horn's weights not found. Using uniform weights.")
@@ -89,7 +89,7 @@ class HeritageRecommender:
         self.ltr_weights: Dict = {}
         if Path(ltr_weights_path).exists():
             print("Loading LTR learned weights...")
-            with open(ltr_weights_path, 'r') as f:
+            with open(ltr_weights_path, 'r', encoding='utf-8') as f:
                 self.ltr_weights = json.load(f)
         else:
             print("LTR learned weights not found. Using default weights.")
@@ -373,12 +373,14 @@ class HeritageRecommender:
         # embedding_mapping.json maps doc_id → faiss_idx, so we build the
         # reverse lookup once from self.metadata.
         if not hasattr(self, '_faiss_to_docnode_idx'):
-            # self.metadata is {doc_id: faiss_idx}
-            faiss_to_doc_id = {v: k for k, v in self.metadata.items()}
+            # embedding_mapping.json has a 'documents' list; each entry has
+            # 'index' (the FAISS position) which corresponds to KG node doc_{index}
             self._faiss_to_docnode_idx: dict = {}
-            for fi, did in faiss_to_doc_id.items():
-                if did in self.doc_id_to_idx:
-                    self._faiss_to_docnode_idx[fi] = self.doc_id_to_idx[did]
+            for doc in self.metadata.get('documents', []):
+                faiss_i = doc['index']
+                doc_id = f"doc_{faiss_i}"
+                if doc_id in self.doc_id_to_idx:
+                    self._faiss_to_docnode_idx[faiss_i] = self.doc_id_to_idx[doc_id]
 
         query_doc_idx = self._faiss_to_docnode_idx.get(faiss_idx, 0)
 

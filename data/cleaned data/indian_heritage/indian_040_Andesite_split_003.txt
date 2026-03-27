@@ -1,0 +1,17 @@
+Genesis
+Intermediate volcanic rocks are created via several processes:
+Fractional crystallization of a mafic parent magma. Partial melting of crustal material.
+Intermediate volcanic rocks are created via several processes:
+Fractional crystallization of a mafic parent magma.
+Partial melting of crustal material.
+Magma mixing between felsic rhyolitic and mafic basaltic magmas in a magma reservoir
+Partial melting of metasomatized mantle
+Fractional crystallization
+To achieve andesitic composition via fractional crystallization, a basaltic magma must crystallize specific minerals that are then removed from the melt. This removal can take place in a variety of ways, but most commonly this occurs by crystal settling. The first minerals to crystallize and be removed from a basaltic parent are olivines and amphiboles. These mafic minerals settle out of the magma, forming mafic cumulates. There is geophysical evidence from several arcs that large layers of mafic cumulates lie at the base of the crust. Once these mafic minerals have been removed, the melt no longer has a basaltic composition. The silica content of the residual melt is enriched relative to the starting composition. The iron and magnesium contents are depleted. As this process continues, the melt becomes more and more evolved eventually becoming andesitic. Without continued addition of mafic material, however, the melt will eventually reach a rhyolitic composition. This produces the characteristic basalt-andesite-rhyolite association of island arcs, with andesite the most distinctive rock type.
+Partial melting of the crust
+Partially molten basalt in the mantle wedge moves upwards until it reaches the base of the overriding crust. Once there, the basaltic melt can either underplate the crust, creating a layer of molten material at its base, or it can move into the overriding plate in the form of dykes. If it underplates the crust, the basalt can (in theory) cause partial melting of the lower crust due to the transfer of heat and volatiles. Models of heat transfer, however, show that arc basalts emplaced at temperatures 1100–1240 °C cannot provide enough heat to melt lower crustal amphibolite. Basalt can, however, melt pelitic upper crustal material.
+Magma mixing
+In continental arcs, such as the Andes, magma often pools in the shallow crust creating magma chambers. Magmas in these reservoirs become evolved in composition (dacitic to rhyolitic) through both the process of fractional crystallization and partial melting of the surrounding country rock. Over time as crystallization continues and the system loses heat, these reservoirs cool. In order to remain active, magma chambers must have continued recharge of hot basaltic melt into the system. When this basaltic material mixes with the evolved rhyolitic magma, the composition is returned to andesite, its intermediate phase. Evidence of magma mixing is provided by the presence of phenocrysts in some andesites that are not in chemical equilibrium with the melt in which they are found.
+Partial melting of metasomatized mantle
+High-magnesium andesites (boninites) in island arcs may be primitive andesites, generated from metasomatized mantle.
+Experimental evidence shows that depleted mantle rock exposed to alkali fluids such as might be given off by a subducting slab generates magma resembling high-magnesium andesites.

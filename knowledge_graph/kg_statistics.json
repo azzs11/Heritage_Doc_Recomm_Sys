@@ -1,35 +1,35 @@
 {
-  "total_nodes": 2480,
-  "total_edges": 7100,
+  "total_nodes": 9217,
+  "total_edges": 34565,
   "node_types": {
-    "document": 369,
-    "location": 733,
-    "organization": 668,
-    "person": 689,
+    "document": 1781,
+    "location": 2355,
+    "organization": 2587,
+    "person": 2473,
     "heritage_type": 6,
     "domain": 6,
     "time_period": 3,
     "region": 6
   },
   "edge_types": {
-    "mentions_location": 1634,
-    "mentions_org": 1068,
-    "has_type": 727,
-    "belongs_to_domain": 1066,
-    "from_period": 321,
-    "located_in_region": 247,
-    "similar_to": 606,
-    "same_cluster": 438,
-    "mentions_person": 964,
+    "mentions_location": 7036,
+    "mentions_org": 4789,
+    "has_type": 3265,
+    "belongs_to_domain": 4648,
+    "from_period": 1311,
+    "located_in_region": 918,
+    "similar_to": 5327,
+    "same_cluster": 2955,
+    "mentions_person": 4287,
     "semantically_related": 12,
     "temporally_related": 3,
     "geographically_related": 14
   },
-  "density": 0.0023097242644666816,
-  "average_degree": 5.725806451612903,
+  "density": 0.0008138315145323255,
+  "average_degree": 7.500271237929912,
   "is_connected": false,
   "number_of_components": 2,
-  "creation_date": "2025-11-29T14:18:51.055168",
+  "creation_date": "2026-03-28T03:20:05.059960",
   "config": {
     "similarity_threshold": 0.6,
     "concept_similarity_threshold": 0.5,
@@ -39,44 +39,44 @@
   },
   "top_central_documents": [
     {
+      "title": "Policy-making institutions",
+      "centrality": 0.008029513888888888
+    },
+    {
+      "title": "Cultural heritage",
+      "centrality": 0.007921006944444444
+    },
+    {
+      "title": "Cultural heritage",
+      "centrality": 0.007921006944444444
+    },
+    {
+      "title": "Monument",
+      "centrality": 0.007486979166666666
+    },
+    {
+      "title": "Monument",
+      "centrality": 0.007161458333333333
+    },
+    {
       "title": "List of heritage registers",
-      "centrality": 0.019766034691407825
-    },
-    {
-      "title": "List of World Heritage Sites in Arab States",
-      "centrality": 0.019766034691407825
-    },
-    {
-      "title": "Lists of World Heritage Sites",
-      "centrality": 0.018959257765227912
-    },
-    {
-      "title": "Lists of World Heritage Sites",
-      "centrality": 0.01855586930213796
-    },
-    {
-      "title": "List of World Heritage Sites in Arab States",
-      "centrality": 0.01855586930213796
+      "centrality": 0.007161458333333333
     },
     {
       "title": "World Heritage Site",
-      "centrality": 0.018152480839048003
+      "centrality": 0.007052951388888888
     },
     {
-      "title": "Monument",
-      "centrality": 0.01653892698668818
+      "title": "Conservation and restoration of cultural property",
+      "centrality": 0.006618923611111111
     },
     {
-      "title": "List of World Heritage Sites in the United States",
-      "centrality": 0.01573215006050827
+      "title": "Objectives",
+      "centrality": 0.006510416666666666
     },
     {
-      "title": "Monument",
-      "centrality": 0.01573215006050827
-    },
-    {
-      "title": "List of World Heritage Sites in Turkey",
-      "centrality": 0.01573215006050827
+      "title": "Conservation and restoration of cultural property",
+      "centrality": 0.006510416666666666
     }
   ]
 }

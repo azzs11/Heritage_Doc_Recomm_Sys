@@ -1,149 +1,21 @@
 {
   "0": {
-    "label": "Cultural Architecture, Site",
+    "label": "Cultural Monument, Architecture",
     "heritage_types": [
-      "architecture",
-      "site"
+      "monument",
+      "architecture"
     ],
     "dominant_domain": "cultural",
     "dominant_period": "ancient",
     "dominant_region": "unknown",
-    "size": 33,
+    "size": 178,
     "sample_titles": [
-      "Oxfordshire Architectural and Historical Society",
-      "Bucharest",
-      "List of oldest buildings in Canada"
+      "World Heritage Site",
+      "Objectives",
+      "Selection criteria"
     ]
   },
   "1": {
-    "label": "Cultural Monument, Site",
-    "heritage_types": [
-      "monument",
-      "site"
-    ],
-    "dominant_domain": "cultural",
-    "dominant_period": "ancient",
-    "dominant_region": "unknown",
-    "size": 35,
-    "sample_titles": [
-      "Lists of World Heritage Sites",
-      "Lists of World Heritage Sites",
-      "List of World Heritage Sites in China"
-    ]
-  },
-  "2": {
-    "label": "Cultural Art, Monument",
-    "heritage_types": [
-      "art",
-      "monument"
-    ],
-    "dominant_domain": "cultural",
-    "dominant_period": "ancient",
-    "dominant_region": "unknown",
-    "size": 24,
-    "sample_titles": [
-      "Spitbank Fort",
-      "Spitbank Fort",
-      "The Match Seller"
-    ]
-  },
-  "3": {
-    "label": "Cultural Monument, Site",
-    "heritage_types": [
-      "monument",
-      "site"
-    ],
-    "dominant_domain": "cultural",
-    "dominant_period": "ancient",
-    "dominant_region": "north",
-    "size": 36,
-    "sample_titles": [
-      "Former World Heritage Sites",
-      "World Heritage Sites by country",
-      "Archaeological Survey of India"
-    ]
-  },
-  "4": {
-    "label": "Architectural Monument, Site",
-    "heritage_types": [
-      "monument",
-      "site"
-    ],
-    "dominant_domain": "architectural",
-    "dominant_period": "ancient",
-    "dominant_region": "india",
-    "size": 15,
-    "sample_titles": [
-      "List of World Heritage Sites in India",
-      "List of World Heritage Sites in India",
-      "Monuments of National Importance"
-    ]
-  },
-  "5": {
-    "label": "Cultural Art, Architecture",
-    "heritage_types": [
-      "art",
-      "architecture"
-    ],
-    "dominant_domain": "cultural",
-    "dominant_period": "ancient",
-    "dominant_region": "unknown",
-    "size": 23,
-    "sample_titles": [
-      "Postmodern architecture",
-      "List of forts in Florida",
-      "California Historical Landmarks in Alameda County"
-    ]
-  },
-  "6": {
-    "label": "Cultural Architecture, Monument",
-    "heritage_types": [
-      "architecture",
-      "monument"
-    ],
-    "dominant_domain": "cultural",
-    "dominant_period": "ancient",
-    "dominant_region": "unknown",
-    "size": 54,
-    "sample_titles": [
-      "The Golden Road: How Ancient India Transformed the World",
-      "The Golden Road: How Ancient India Transformed the World",
-      "New Classical architecture"
-    ]
-  },
-  "7": {
-    "label": "Cultural Monument, Art",
-    "heritage_types": [
-      "monument",
-      "art"
-    ],
-    "dominant_domain": "cultural",
-    "dominant_period": "ancient",
-    "dominant_region": "north",
-    "size": 41,
-    "sample_titles": [
-      "List of World Heritage Sites in the United States",
-      "History of India",
-      "UNESCO Intangible Cultural Heritage Lists"
-    ]
-  },
-  "8": {
-    "label": "Religious Monument, Architecture",
-    "heritage_types": [
-      "monument",
-      "architecture"
-    ],
-    "dominant_domain": "religious",
-    "dominant_period": "ancient",
-    "dominant_region": "north",
-    "size": 18,
-    "sample_titles": [
-      "Sikh architecture",
-      "Makli Necropolis",
-      "Historical monuments in Pristina"
-    ]
-  },
-  "9": {
     "label": "Cultural Art, Site",
     "heritage_types": [
       "art",
@@ -152,14 +24,110 @@
     "dominant_domain": "cultural",
     "dominant_period": "ancient",
     "dominant_region": "unknown",
-    "size": 36,
+    "size": 108,
     "sample_titles": [
-      "Attic (architecture)",
-      "Moundville Archaeological Site",
-      "Listed building"
+      "Government",
+      "Demographics",
+      "Transport"
     ]
   },
-  "10": {
+  "2": {
+    "label": "Cultural Monument, Site",
+    "heritage_types": [
+      "monument",
+      "site"
+    ],
+    "dominant_domain": "cultural",
+    "dominant_period": "ancient",
+    "dominant_region": "north",
+    "size": 197,
+    "sample_titles": [
+      "Archaeological Survey of India",
+      "History",
+      "The Golden Road: How Ancient India Transformed the World"
+    ]
+  },
+  "3": {
+    "label": "Cultural Architecture, Site",
+    "heritage_types": [
+      "architecture",
+      "site"
+    ],
+    "dominant_domain": "cultural",
+    "dominant_period": "ancient",
+    "dominant_region": "unknown",
+    "size": 144,
+    "sample_titles": [
+      "Nomination process",
+      "Endangerment",
+      "Criticism"
+    ]
+  },
+  "4": {
+    "label": "Cultural Art, Site",
+    "heritage_types": [
+      "art",
+      "site"
+    ],
+    "dominant_domain": "cultural",
+    "dominant_period": "ancient",
+    "dominant_region": "north",
+    "size": 188,
+    "sample_titles": [
+      "Bronze Age (c. 3300 – 1800 BCE)",
+      "Early medieval period (c. 650 – 1200)",
+      "Late medieval period (c. 1200 – 1526)"
+    ]
+  },
+  "5": {
+    "label": "Cultural Art, Site",
+    "heritage_types": [
+      "art",
+      "site"
+    ],
+    "dominant_domain": "cultural",
+    "dominant_period": "unknown",
+    "dominant_region": "unknown",
+    "size": 104,
+    "sample_titles": [
+      "Climate",
+      "Economy",
+      "Education"
+    ]
+  },
+  "6": {
+    "label": "Cultural Monument, Architecture",
+    "heritage_types": [
+      "monument",
+      "architecture"
+    ],
+    "dominant_domain": "cultural",
+    "dominant_period": "ancient",
+    "dominant_region": "unknown",
+    "size": 210,
+    "sample_titles": [
+      "History",
+      "Ancient monument",
+      "Historical significance and cultural heritage"
+    ]
+  },
+  "7": {
+    "label": "Cultural Monument, Architecture",
+    "heritage_types": [
+      "monument",
+      "architecture"
+    ],
+    "dominant_domain": "cultural",
+    "dominant_period": "ancient",
+    "dominant_region": "unknown",
+    "size": 131,
+    "sample_titles": [
+      "Oxfordshire Architectural and Historical Society",
+      "Changing pedagogies",
+      "Bucharest"
+    ]
+  },
+  "8": {
     "label": "Cultural Art, Monument",
     "heritage_types": [
       "art",
@@ -167,12 +135,44 @@
     ],
     "dominant_domain": "cultural",
     "dominant_period": "ancient",
-    "dominant_region": "india",
-    "size": 17,
+    "dominant_region": "unknown",
+    "size": 109,
     "sample_titles": [
-      "List of forts in the United States",
-      "Fort William Historical Park",
-      "Ancient Aliens"
+      "Extensions and other modifications",
+      "Postmodern architecture",
+      "Notable postmodern buildings and architects"
+    ]
+  },
+  "9": {
+    "label": "Religious Monument, Architecture",
+    "heritage_types": [
+      "monument",
+      "architecture"
+    ],
+    "dominant_domain": "religious",
+    "dominant_period": "ancient",
+    "dominant_region": "north",
+    "size": 145,
+    "sample_titles": [
+      "List of World Heritage Sites in India",
+      "List of World Heritage Sites in India",
+      "Monuments of National Importance"
+    ]
+  },
+  "10": {
+    "label": "Cultural Art, Site",
+    "heritage_types": [
+      "art",
+      "site"
+    ],
+    "dominant_domain": "cultural",
+    "dominant_period": "unknown",
+    "dominant_region": "north",
+    "size": 140,
+    "sample_titles": [
+      "Late modern period and contemporary history (1857–1947)",
+      "Independence and partition (1947–present)",
+      "National symbols"
     ]
   },
   "11": {
@@ -183,12 +183,12 @@
     ],
     "dominant_domain": "cultural",
     "dominant_period": "ancient",
-    "dominant_region": "north",
-    "size": 37,
+    "dominant_region": "unknown",
+    "size": 127,
     "sample_titles": [
-      "World Heritage Site",
-      "Intangible cultural heritage",
-      "Archaeological site"
+      "Scientific preservation",
+      "Publications",
+      "Korean architecture"
     ]
   }
 }
