@@ -13,9 +13,15 @@ import numpy as np
 import pickle
 import json
 import faiss
+import logging
 from pathlib import Path
-from typing import Dict, List, Tuple, Set
+from typing import Dict, List, Tuple, Set, Optional
 import networkx as nx
+import sys
+import os
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 
 class HeritageRecommender:
@@ -29,9 +35,12 @@ class HeritageRecommender:
         metadata_path: str = 'data/embeddings/embedding_mapping.json',
         faiss_index_path: str = 'models/ranker/faiss/hnsw_index.faiss',
         horn_weights_path: str = 'knowledge_graph/horn_weights.json',
+        ltr_weights_path: str = 'models/ranker/learned_weights.json',
+        query_classifier_path: str = 'models/ranker/query_classifier.pkl',
         simrank_weight: float = 0.4,
         horn_weight: float = 0.3,
-        embedding_weight: float = 0.3
+        embedding_weight: float = 0.3,
+        horn_fallback_value: float = 0.5
     ):
         """
         Initialize hybrid recommender.
@@ -43,9 +52,12 @@ class HeritageRecommender:
             metadata_path: Path to embedding metadata
             faiss_index_path: Path to FAISS index
             horn_weights_path: Path to Horn's Index weights
+            ltr_weights_path: Path to LTR learned weights JSON (optional)
+            query_classifier_path: Path to trained query classifier pickle (optional)
             simrank_weight: Weight for SimRank score (default 0.4)
             horn_weight: Weight for Horn's Index score (default 0.3)
             embedding_weight: Weight for embedding similarity (default 0.3)
+            horn_fallback_value: Fallback value when Horn weights unavailable (default 0.5)
         """
         print("Loading knowledge graph...")
         with open(kg_path, 'rb') as f:
@@ -73,10 +85,66 @@ class HeritageRecommender:
         else:
             print("Warning: Horn's weights not found. Using uniform weights.")
 
-        # Scoring weights
+        # Load LTR learned weights if available
+        self.ltr_weights: Dict = {}
+        if Path(ltr_weights_path).exists():
+            print("Loading LTR learned weights...")
+            with open(ltr_weights_path, 'r') as f:
+                self.ltr_weights = json.load(f)
+        else:
+            print("LTR learned weights not found. Using default weights.")
+
+        # Add ranking module to path so pkl classes can be unpickled
+        ranking_dir = str(Path(query_classifier_path).parent.parent.parent / 'src' / '5_ranking')
+        if ranking_dir not in sys.path:
+            sys.path.insert(0, ranking_dir)
+
+        # Load query classifier if available
+        self.query_classifier = None
+        if Path(query_classifier_path).exists():
+            print("Loading query classifier...")
+            with open(query_classifier_path, 'rb') as f:
+                self.query_classifier = pickle.load(f)
+            print("Query classifier loaded.")
+        else:
+            print("Query classifier not found. Query-type adaptive ranking disabled.")
+
+        # Load LTR model for per-document scoring (prefer lambdamart, fall back to others)
+        self._ltr_model = None
+        self._ltr_model_type = None
+        for model_name in ('lambdamart_model.pkl', 'ranknet_model.pkl', 'listnet_model.pkl'):
+            candidate = Path(ltr_weights_path).parent / model_name
+            if candidate.exists():
+                try:
+                    with open(candidate, 'rb') as f:
+                        model_data = pickle.load(f)
+                    self._ltr_model = model_data.get('model')
+                    self._ltr_model_type = model_data.get('model_type', 'lambdamart')
+                    # For neural models, load state into wrapper
+                    if self._ltr_model_type in ('ranknet', 'listnet') and 'model_state' in model_data:
+                        import torch
+                        if self._ltr_model_type == 'ranknet':
+                            from learned_ranker import RankNet
+                            net = RankNet(18)
+                        else:
+                            from learned_ranker import ListNet
+                            net = ListNet(18)
+                        net.load_state_dict(model_data['model_state'])
+                        net.eval()
+                        self._ltr_model = net
+                    print(f"LTR model loaded: {model_name} ({self._ltr_model_type})")
+                    break
+                except Exception as e:
+                    logger.warning("Could not load LTR model %s: %s", model_name, e)
+        if self._ltr_model is None:
+            print("No LTR model loaded. ltr_score will be 0.0.")
+
+        # Scoring weights (defaults, overridden per-query by LTR if available)
         self.simrank_weight = simrank_weight
         self.horn_weight = horn_weight
         self.embedding_weight = embedding_weight
+        self.horn_fallback_value = horn_fallback_value
+        self._horn_fallback_logged = False  # Log warning only once
 
         # Create document index mapping
         self.doc_nodes = [n for n, d in self.G.nodes(data=True) if d.get('node_type') == 'document']
@@ -113,7 +181,11 @@ class HeritageRecommender:
             Horn's Index score [0, 1]
         """
         if not self.horn_weights:
-            return 0.5  # Uniform weight if Horn's not available
+            # Log warning only once to avoid spam
+            if not self._horn_fallback_logged:
+                logger.warning(f"Horn weights not available. Using fallback value: {self.horn_fallback_value}")
+                self._horn_fallback_logged = True
+            return self.horn_fallback_value
 
         # Get document's connected entities
         doc_entities = set()
@@ -239,7 +311,12 @@ class HeritageRecommender:
         self,
         parsed_query: Dict,
         top_k: int = 10,
-        explain: bool = True
+        candidates_k: Optional[int] = None,
+        explain: bool = True,
+        filter_period: Optional[List[str]] = None,
+        filter_region: Optional[List[str]] = None,
+        filter_heritage: Optional[List[str]] = None,
+        filter_domain: Optional[List[str]] = None
     ) -> List[Dict]:
         """
         Generate top-K recommendations using hybrid scoring.
@@ -248,6 +325,10 @@ class HeritageRecommender:
             parsed_query: Parsed query from QueryProcessor
             top_k: Number of recommendations to return
             explain: Whether to include KG path explanations
+            filter_period: Optional list of time periods to filter by (e.g., ['ancient', 'medieval'])
+            filter_region: Optional list of regions to filter by (e.g., ['north', 'south'])
+            filter_heritage: Optional list of heritage types to filter by (e.g., ['temple', 'fort'])
+            filter_domain: Optional list of domains to filter by (e.g., ['religious', 'military'])
 
         Returns:
             List of recommendation dictionaries with scores and explanations
@@ -255,26 +336,70 @@ class HeritageRecommender:
         query_embedding = parsed_query['query_embedding']
         scores = []
 
+        # Determine per-query weights via LTR (if classifier + weights available)
+        simrank_w, horn_w, emb_w = self.simrank_weight, self.horn_weight, self.embedding_weight
+        if self.query_classifier is not None:
+            query_text = parsed_query.get('original_query', '')
+            all_entities = (
+                parsed_query.get('locations', []) +
+                parsed_query.get('persons', []) +
+                parsed_query.get('organizations', [])
+            )
+            try:
+                _type_id, query_type_name, _conf = self.query_classifier.predict(query_text, all_entities)
+                # Pick best available model's weights; prefer lambdamart, else first available
+                model_weights = (
+                    self.ltr_weights.get('lambdamart') or
+                    next(iter(self.ltr_weights.values()), None)
+                ) if self.ltr_weights else None
+                if model_weights and query_type_name in model_weights:
+                    w = model_weights[query_type_name]
+                    simrank_w = w.get('simrank_weight', simrank_w)
+                    horn_w = w.get('horn_index_weight', horn_w)
+                    emb_w = w.get('embedding_weight', emb_w)
+                    logger.debug(
+                        "LTR weights for '%s': simrank=%.3f horn=%.3f emb=%.3f",
+                        query_type_name, simrank_w, horn_w, emb_w,
+                    )
+            except Exception as e:
+                logger.warning("Query classifier failed, using defaults: %s", e)
+
+        # Select query document: single most embedding-similar document.
+        # FAISS returns an index into the embeddings array; we must map that
+        # back to the doc_nodes index used by the SimRank matrix.
+        faiss_idx = self._get_top_k_similar_by_embedding(query_embedding, k=1)[0]
+
+        # Map FAISS embedding index → document node id → doc_nodes index.
+        # embedding_mapping.json maps doc_id → faiss_idx, so we build the
+        # reverse lookup once from self.metadata.
+        if not hasattr(self, '_faiss_to_docnode_idx'):
+            # self.metadata is {doc_id: faiss_idx}
+            faiss_to_doc_id = {v: k for k, v in self.metadata.items()}
+            self._faiss_to_docnode_idx: dict = {}
+            for fi, did in faiss_to_doc_id.items():
+                if did in self.doc_id_to_idx:
+                    self._faiss_to_docnode_idx[fi] = self.doc_id_to_idx[did]
+
+        query_doc_idx = self._faiss_to_docnode_idx.get(faiss_idx, 0)
+
         # Compute hybrid scores for all documents
         for doc_idx, doc_id in enumerate(self.doc_nodes):
             # Embedding similarity (always available)
             emb_score = self.compute_embedding_similarity(query_embedding, doc_idx)
 
-            # SimRank score (structural similarity)
-            # For new queries, use average SimRank with top-k similar docs
-            top_k_similar_indices = self._get_top_k_similar_by_embedding(query_embedding, k=5)
-            simrank_scores = [self.compute_simrank_score(similar_idx, doc_idx)
-                            for similar_idx in top_k_similar_indices]
-            simrank_score = np.mean(simrank_scores) if simrank_scores else 0.0
+            # SimRank score (structural similarity to query document).
+            # query_doc_idx and doc_idx are both indices into self.doc_nodes,
+            # which aligns with the SimRank matrix rows/columns.
+            simrank_score = self.compute_simrank_score(query_doc_idx, doc_idx)
 
             # Horn's Index score (entity importance)
             horn_score = self.compute_horn_score(doc_id, parsed_query)
 
-            # Hybrid score
+            # Hybrid score (uses LTR-learned per-query-type weights when available)
             hybrid_score = (
-                self.simrank_weight * simrank_score +
-                self.horn_weight * horn_score +
-                self.embedding_weight * emb_score
+                simrank_w * simrank_score +
+                horn_w * horn_score +
+                emb_w * emb_score
             )
 
             scores.append({
@@ -286,14 +411,135 @@ class HeritageRecommender:
                 'embedding_score': emb_score
             })
 
+        # Compute LTR scores in batch if a model is loaded
+        if self._ltr_model is not None:
+            try:
+                # Build normalized component arrays for the full doc list
+                all_sr = np.array([s['simrank_score'] for s in scores])
+                all_hn = np.array([s['horn_score'] for s in scores])
+                all_em = np.array([s['embedding_score'] for s in scores])
+
+                def _minmax(arr):
+                    lo, hi = arr.min(), arr.max()
+                    return (arr - lo) / (hi - lo) if hi - lo > 1e-9 else np.zeros_like(arr)
+
+                sr_norm = _minmax(all_sr)
+                hn_norm = _minmax(all_hn)
+                em_norm = _minmax(all_em)
+
+                # Query-level features (constant across all docs for this query)
+                all_entities = (
+                    parsed_query.get('locations', []) +
+                    parsed_query.get('persons', []) +
+                    parsed_query.get('organizations', [])
+                )
+                num_entities = float(len(all_entities))
+                query_text = parsed_query.get('original_query', '')
+                query_len = float(len(query_text.split()))
+                query_complexity = min(1.0, query_len / 20.0)
+                query_type_enc = 0.0
+                if self.query_classifier is not None:
+                    try:
+                        type_id, _, _ = self.query_classifier.predict(query_text, all_entities)
+                        query_type_enc = float(type_id)
+                    except Exception:
+                        pass
+
+                # Build feature matrix (18 features per doc, matching QueryDocFeatures.to_feature_vector)
+                n_docs = len(scores)
+                X = np.zeros((n_docs, 18), dtype=float)
+                for i, (s, sr, hn, em, srn, hnn, emn) in enumerate(
+                    zip(scores, all_sr, all_hn, all_em, sr_norm, hn_norm, em_norm)
+                ):
+                    doc_id = s['doc_id']
+                    doc_data = self.G.nodes.get(doc_id, {})
+
+                    # Overlap features
+                    doc_ht = set(doc_data.get('heritage_types', []) or [])
+                    q_ht = set(parsed_query.get('heritage_types', []))
+                    ht_match = 1.0 if doc_ht & q_ht else 0.0
+
+                    doc_dom = set(doc_data.get('domains', []) or [])
+                    q_dom = set(parsed_query.get('domains', []))
+                    dom_union = doc_dom | q_dom
+                    dom_overlap = len(doc_dom & q_dom) / len(dom_union) if dom_union else 0.0
+
+                    tp_match = 1.0 if (
+                        parsed_query.get('time_period') and
+                        doc_data.get('time_period') == parsed_query['time_period']
+                    ) else 0.0
+                    reg_match = 1.0 if (
+                        parsed_query.get('region') and
+                        doc_data.get('region') == parsed_query['region']
+                    ) else 0.0
+
+                    # Document graph features
+                    node_degree = float(self.G.degree(doc_id)) if doc_id in self.G else 0.0
+
+                    X[i] = [
+                        sr, hn, em,        # raw component scores
+                        srn, hnn, emn,     # normalized
+                        ht_match, dom_overlap, tp_match, reg_match,  # overlap
+                        0.0,               # cluster_id (not available at query time)
+                        node_degree, 1.0, 1.0,  # node_degree, doc_length, doc_completeness
+                        num_entities, query_len, query_complexity, query_type_enc,
+                    ]
+
+                # Predict
+                if self._ltr_model_type == 'lambdamart':
+                    ltr_scores = self._ltr_model.predict(X)
+                else:
+                    import torch
+                    with torch.no_grad():
+                        ltr_scores = self._ltr_model(torch.FloatTensor(X)).numpy()
+                    if ltr_scores.ndim > 1:
+                        ltr_scores = ltr_scores.squeeze(-1)
+
+                # Normalise LTR scores to [0, 1] and inject
+                ltr_min, ltr_max = ltr_scores.min(), ltr_scores.max()
+                if ltr_max - ltr_min > 1e-9:
+                    ltr_scores = (ltr_scores - ltr_min) / (ltr_max - ltr_min)
+                else:
+                    ltr_scores = np.zeros(n_docs)
+
+                for s, ltr_s in zip(scores, ltr_scores):
+                    s['ltr_score'] = float(ltr_s)
+
+            except Exception as e:
+                logger.warning("LTR scoring failed, ltr_score=0.0: %s", e)
+                for s in scores:
+                    s.setdefault('ltr_score', 0.0)
+        else:
+            for s in scores:
+                s['ltr_score'] = 0.0
+
         # Sort by hybrid score
         scores = sorted(scores, key=lambda x: x['hybrid_score'], reverse=True)
 
-        # Get top-K recommendations
+        # Apply filters if provided (filter AFTER scoring, BEFORE selecting top-K)
+        if any([filter_period, filter_region, filter_heritage, filter_domain]):
+            scores = self._apply_filters(
+                scores,
+                filter_period,
+                filter_region,
+                filter_heritage,
+                filter_domain
+            )
+
+        # Get top-K recommendations (or more candidates for ensemble re-ranking)
+        fetch_k = candidates_k if candidates_k and candidates_k > top_k else top_k
         recommendations = []
-        for rank, score_dict in enumerate(scores[:top_k], 1):
+        for rank, score_dict in enumerate(scores[:fetch_k], 1):
             doc_id = score_dict['doc_id']
             doc_data = self.G.nodes[doc_id]
+
+            # Extract metadata (handle both arrays and single values)
+            heritage_types = doc_data.get('heritage_types', [])
+            domains = doc_data.get('domains', [])
+
+            # Convert to display strings (join arrays with comma)
+            heritage_display = ', '.join(heritage_types) if heritage_types else None
+            domain_display = ', '.join(domains) if domains else None
 
             rec = {
                 'rank': rank,
@@ -303,11 +549,12 @@ class HeritageRecommender:
                 'component_scores': {
                     'simrank': score_dict['simrank_score'],
                     'horn': score_dict['horn_score'],
-                    'embedding': score_dict['embedding_score']
+                    'embedding': score_dict['embedding_score'],
+                    'ltr': score_dict.get('ltr_score', 0.0),
                 },
                 'metadata': {
-                    'heritage_type': doc_data.get('heritage_type'),
-                    'domain': doc_data.get('domain'),
+                    'heritage_type': heritage_display,
+                    'domain': domain_display,
                     'time_period': doc_data.get('time_period'),
                     'region': doc_data.get('region')
                 }
@@ -321,16 +568,91 @@ class HeritageRecommender:
 
                 explanations = []
                 for similar_doc_id in top_similar_docs:
-                    paths = self.get_kg_path_explanation(similar_doc_id, doc_id, max_paths=1)
-                    if paths:
-                        path_str = self.format_path_explanation(paths[0])
-                        explanations.append(path_str)
+                    try:
+                        paths = self.get_kg_path_explanation(similar_doc_id, doc_id, max_paths=1)
+                        if paths:
+                            path_str = self.format_path_explanation(paths[0])
+                            explanations.append(path_str)
+                    except Exception as e:
+                        logger.warning(
+                            "KG traversal failed for %s -> %s: %s",
+                            similar_doc_id, doc_id, e,
+                        )
 
                 rec['kg_explanations'] = explanations
 
             recommendations.append(rec)
 
         return recommendations
+
+    def _apply_filters(
+        self,
+        scores: List[Dict],
+        filter_period: Optional[List[str]],
+        filter_region: Optional[List[str]],
+        filter_heritage: Optional[List[str]],
+        filter_domain: Optional[List[str]]
+    ) -> List[Dict]:
+        """
+        Filter scored documents based on metadata.
+
+        All comparisons are case-insensitive (values normalised to lowercase).
+        Empty / None filter lists are treated as "no filter".
+
+        Args:
+            scores: List of score dictionaries with doc_id
+            filter_period: Time periods to filter by (empty list = no filter)
+            filter_region: Regions to filter by (empty list = no filter)
+            filter_heritage: Heritage types to filter by (empty list = no filter)
+            filter_domain: Domains to filter by (empty list = no filter)
+
+        Returns:
+            Filtered list of score dictionaries
+        """
+        # Normalise filter values to lowercase sets for O(1) lookup
+        norm_period  = {v.lower() for v in filter_period}  if filter_period  else set()
+        norm_region  = {v.lower() for v in filter_region}  if filter_region  else set()
+        norm_heritage = {v.lower() for v in filter_heritage} if filter_heritage else set()
+        norm_domain  = {v.lower() for v in filter_domain}  if filter_domain  else set()
+
+        filtered = []
+        for score_dict in scores:
+            doc_id = score_dict['doc_id']
+            doc_data = self.G.nodes[doc_id]
+
+            # Time period — single string value in graph node
+            if norm_period:
+                period = (doc_data.get('time_period') or '').lower()
+                if period not in norm_period:
+                    continue
+
+            # Region — single string value in graph node
+            if norm_region:
+                region = (doc_data.get('region') or '').lower()
+                if region not in norm_region:
+                    continue
+
+            # Heritage types — list in graph node; pass if ANY value matches
+            if norm_heritage:
+                heritage_types = doc_data.get('heritage_types', [])
+                if isinstance(heritage_types, str):
+                    heritage_types = [heritage_types]
+                doc_ht = {h.lower() for h in heritage_types}
+                if not doc_ht.intersection(norm_heritage):
+                    continue
+
+            # Domains — list in graph node; pass if ANY value matches
+            if norm_domain:
+                domains = doc_data.get('domains', [])
+                if isinstance(domains, str):
+                    domains = [domains]
+                doc_dom = {d.lower() for d in domains}
+                if not doc_dom.intersection(norm_domain):
+                    continue
+
+            filtered.append(score_dict)
+
+        return filtered
 
     def _get_top_k_similar_by_embedding(self, query_embedding: np.ndarray, k: int = 5) -> List[int]:
         """

@@ -1,0 +1,2220 @@
+{
+  "seed_005": {
+    "documents": [
+      {
+        "doc_id": "doc_259",
+        "simrank_score": 1.0,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.6335840225219727
+      },
+      {
+        "doc_id": "doc_225",
+        "simrank_score": 0.00703890947625041,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.554969072341919
+      },
+      {
+        "doc_id": "doc_337",
+        "simrank_score": 0.12381477653980255,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.6335840225219727
+      },
+      {
+        "doc_id": "doc_249",
+        "simrank_score": 0.005738540086895227,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.44945311546325684
+      },
+      {
+        "doc_id": "doc_234",
+        "simrank_score": 0.07406698912382126,
+        "horn_score": 1.0,
+        "embedding_score": 0.23489338159561157
+      },
+      {
+        "doc_id": "doc_150",
+        "simrank_score": 0.10640298575162888,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.5335055589675903
+      },
+      {
+        "doc_id": "doc_152",
+        "simrank_score": 0.10640298575162888,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.5335055589675903
+      },
+      {
+        "doc_id": "doc_222",
+        "simrank_score": 0.005087321158498526,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.39987197518348694
+      },
+      {
+        "doc_id": "doc_129",
+        "simrank_score": 0.09744910150766373,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.40566226840019226
+      },
+      {
+        "doc_id": "doc_181",
+        "simrank_score": 0.003112626960501075,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.37655988335609436
+      },
+      {
+        "doc_id": "doc_183",
+        "simrank_score": 0.003112626960501075,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.37655988335609436
+      },
+      {
+        "doc_id": "doc_146",
+        "simrank_score": 0.0009507355280220509,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.37448248267173767
+      },
+      {
+        "doc_id": "doc_354",
+        "simrank_score": 0.006145230028778315,
+        "horn_score": 1.0,
+        "embedding_score": 0.258009672164917
+      },
+      {
+        "doc_id": "doc_265",
+        "simrank_score": 0.004473916720598936,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.508196234703064
+      },
+      {
+        "doc_id": "doc_232",
+        "simrank_score": 0.007159062661230564,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.4679800271987915
+      },
+      {
+        "doc_id": "doc_123",
+        "simrank_score": 0.015372726134955883,
+        "horn_score": 1.0,
+        "embedding_score": 0.18777376413345337
+      },
+      {
+        "doc_id": "doc_347",
+        "simrank_score": 0.05972800776362419,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.23058317601680756
+      },
+      {
+        "doc_id": "doc_281",
+        "simrank_score": 0.07907303422689438,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.20056931674480438
+      },
+      {
+        "doc_id": "doc_48",
+        "simrank_score": 0.0062448387034237385,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.29659053683280945
+      },
+      {
+        "doc_id": "doc_50",
+        "simrank_score": 0.0062448387034237385,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.29659053683280945
+      },
+      {
+        "doc_id": "doc_254",
+        "simrank_score": 0.007121153641492128,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.4351412057876587
+      },
+      {
+        "doc_id": "doc_128",
+        "simrank_score": 0.08460592478513718,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.3558441996574402
+      },
+      {
+        "doc_id": "doc_283",
+        "simrank_score": 0.06286311149597168,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.2082059383392334
+      },
+      {
+        "doc_id": "doc_76",
+        "simrank_score": 0.0026665625628083944,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.28560227155685425
+      },
+      {
+        "doc_id": "doc_78",
+        "simrank_score": 0.0026665625628083944,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.28560227155685425
+      },
+      {
+        "doc_id": "doc_223",
+        "simrank_score": 0.00846282672137022,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.27521252632141113
+      },
+      {
+        "doc_id": "doc_59",
+        "simrank_score": 0.004836087115108967,
+        "horn_score": 1.0,
+        "embedding_score": 0.16840887069702148
+      },
+      {
+        "doc_id": "doc_56",
+        "simrank_score": 0.004835109226405621,
+        "horn_score": 1.0,
+        "embedding_score": 0.16840887069702148
+      },
+      {
+        "doc_id": "doc_336",
+        "simrank_score": 0.007050450891256332,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.41872909665107727
+      },
+      {
+        "doc_id": "doc_300",
+        "simrank_score": 0.010684358887374401,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.2577529847621918
+      },
+      {
+        "doc_id": "doc_77",
+        "simrank_score": 0.008175486698746681,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.2562255561351776
+      },
+      {
+        "doc_id": "doc_79",
+        "simrank_score": 0.008175486698746681,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.2562255561351776
+      },
+      {
+        "doc_id": "doc_68",
+        "simrank_score": 0.0052047730423510075,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.2579037547111511
+      },
+      {
+        "doc_id": "doc_203",
+        "simrank_score": 0.0052047730423510075,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.2579037547111511
+      },
+      {
+        "doc_id": "doc_284",
+        "simrank_score": 0.09744272381067276,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.2818317115306854
+      },
+      {
+        "doc_id": "doc_174",
+        "simrank_score": 0.0008948299218900502,
+        "horn_score": 1.0,
+        "embedding_score": 0.15389692783355713
+      },
+      {
+        "doc_id": "doc_178",
+        "simrank_score": 0.0008463170961476862,
+        "horn_score": 1.0,
+        "embedding_score": 0.15389692783355713
+      },
+      {
+        "doc_id": "doc_92",
+        "simrank_score": 0.0033530709333717823,
+        "horn_score": 1.0,
+        "embedding_score": 0.14903227984905243
+      },
+      {
+        "doc_id": "doc_98",
+        "simrank_score": 0.0033530709333717823,
+        "horn_score": 1.0,
+        "embedding_score": 0.14903227984905243
+      },
+      {
+        "doc_id": "doc_189",
+        "simrank_score": 0.0010512745939195156,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.252833753824234
+      },
+      {
+        "doc_id": "doc_272",
+        "simrank_score": 0.005726957228034735,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.377825528383255
+      },
+      {
+        "doc_id": "doc_224",
+        "simrank_score": 0.011262723244726658,
+        "horn_score": 0.7960933556468939,
+        "embedding_score": 0.324459433555603
+      },
+      {
+        "doc_id": "doc_344",
+        "simrank_score": 0.001809232635423541,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.2305898666381836
+      },
+      {
+        "doc_id": "doc_219",
+        "simrank_score": 0.08960588276386261,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.3299884796142578
+      },
+      {
+        "doc_id": "doc_299",
+        "simrank_score": 0.006552014034241438,
+        "horn_score": 0.7960933556468939,
+        "embedding_score": 0.31191444396972656
+      },
+      {
+        "doc_id": "doc_90",
+        "simrank_score": 0.0012023941380903125,
+        "horn_score": 1.0,
+        "embedding_score": 0.11344266682863235
+      },
+      {
+        "doc_id": "doc_54",
+        "simrank_score": 0.0052371094934642315,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.20685939490795135
+      },
+      {
+        "doc_id": "doc_58",
+        "simrank_score": 0.0052371094934642315,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.20685939490795135
+      },
+      {
+        "doc_id": "doc_240",
+        "simrank_score": 0.006882319226861,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.4214625358581543
+      },
+      {
+        "doc_id": "doc_22",
+        "simrank_score": 0.002880267333239317,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.20436444878578186
+      },
+      {
+        "doc_id": "doc_133",
+        "simrank_score": 0.004050358664244413,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.37542983889579773
+      },
+      {
+        "doc_id": "doc_135",
+        "simrank_score": 0.004050358664244413,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.37542983889579773
+      },
+      {
+        "doc_id": "doc_280",
+        "simrank_score": 0.00498075969517231,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.453659325838089
+      },
+      {
+        "doc_id": "doc_138",
+        "simrank_score": 0.0011628000065684319,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.4557006359100342
+      },
+      {
+        "doc_id": "doc_140",
+        "simrank_score": 0.0011628000065684319,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.4557006359100342
+      },
+      {
+        "doc_id": "doc_121",
+        "simrank_score": 0.01431375090032816,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.16759082674980164
+      },
+      {
+        "doc_id": "doc_74",
+        "simrank_score": 0.0019750557839870453,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.1770777404308319
+      },
+      {
+        "doc_id": "doc_286",
+        "simrank_score": 0.013308456167578697,
+        "horn_score": 0.7960933556468939,
+        "embedding_score": 0.2617298662662506
+      },
+      {
+        "doc_id": "doc_20",
+        "simrank_score": 0.0037054838612675667,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.32295727729797363
+      },
+      {
+        "doc_id": "doc_175",
+        "simrank_score": 0.00022547914704773575,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.1741061508655548
+      },
+      {
+        "doc_id": "doc_340",
+        "simrank_score": 0.0004695553216151893,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.31858116388320923
+      },
+      {
+        "doc_id": "doc_46",
+        "simrank_score": 0.005509575363248587,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.4214510917663574
+      },
+      {
+        "doc_id": "doc_282",
+        "simrank_score": 0.0924396887421608,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.30537474155426025
+      },
+      {
+        "doc_id": "doc_13",
+        "simrank_score": 0.005588025785982609,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.29898250102996826
+      },
+      {
+        "doc_id": "doc_141",
+        "simrank_score": 0.003863915801048279,
+        "horn_score": 0.5917501591672232,
+        "embedding_score": 0.46521562337875366
+      },
+      {
+        "doc_id": "doc_143",
+        "simrank_score": 0.003863915801048279,
+        "horn_score": 0.5917501591672232,
+        "embedding_score": 0.46521562337875366
+      },
+      {
+        "doc_id": "doc_30",
+        "simrank_score": 0.005788977257907391,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.31684279441833496
+      },
+      {
+        "doc_id": "doc_252",
+        "simrank_score": 0.003661166876554489,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.3095392882823944
+      },
+      {
+        "doc_id": "doc_316",
+        "simrank_score": 0.00039543877937830985,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.16168978810310364
+      },
+      {
+        "doc_id": "doc_91",
+        "simrank_score": 0.000289220450213179,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.15722054243087769
+      },
+      {
+        "doc_id": "doc_94",
+        "simrank_score": 0.000289220450213179,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.15722054243087769
+      },
+      {
+        "doc_id": "doc_187",
+        "simrank_score": 0.0005687203956767917,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.15633636713027954
+      },
+      {
+        "doc_id": "doc_190",
+        "simrank_score": 0.0005687203956767917,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.15633636713027954
+      },
+      {
+        "doc_id": "doc_49",
+        "simrank_score": 0.0051011149771511555,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.1489706188440323
+      },
+      {
+        "doc_id": "doc_47",
+        "simrank_score": 0.004902869462966919,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.1489706188440323
+      },
+      {
+        "doc_id": "doc_268",
+        "simrank_score": 0.0016274196095764637,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.15177568793296814
+      },
+      {
+        "doc_id": "doc_271",
+        "simrank_score": 0.0016274196095764637,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.15177568793296814
+      },
+      {
+        "doc_id": "doc_136",
+        "simrank_score": 0.0002208836522186175,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.328940212726593
+      },
+      {
+        "doc_id": "doc_260",
+        "simrank_score": 0.00595653522759676,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.3028460144996643
+      },
+      {
+        "doc_id": "doc_221",
+        "simrank_score": 0.009171892888844013,
+        "horn_score": 0.7960933556468939,
+        "embedding_score": 0.23652955889701843
+      },
+      {
+        "doc_id": "doc_93",
+        "simrank_score": 0.0009674577740952373,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.14197343587875366
+      },
+      {
+        "doc_id": "doc_11",
+        "simrank_score": 0.007019898388534784,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.39139074087142944
+      },
+      {
+        "doc_id": "doc_292",
+        "simrank_score": 0.014096414670348167,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.2697272300720215
+      },
+      {
+        "doc_id": "doc_19",
+        "simrank_score": 0.00108441396150738,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.13524845242500305
+      },
+      {
+        "doc_id": "doc_17",
+        "simrank_score": 0.06844505667686462,
+        "horn_score": 0.6196498587735666,
+        "embedding_score": 0.32071661949157715
+      },
+      {
+        "doc_id": "doc_127",
+        "simrank_score": 0.00016595274792052805,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.28296855092048645
+      },
+      {
+        "doc_id": "doc_95",
+        "simrank_score": 0.001518632285296917,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.12599650025367737
+      },
+      {
+        "doc_id": "doc_97",
+        "simrank_score": 0.001518632285296917,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.12599650025367737
+      },
+      {
+        "doc_id": "doc_363",
+        "simrank_score": 0.0002603069588076323,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.3440313935279846
+      },
+      {
+        "doc_id": "doc_313",
+        "simrank_score": 0.00440974161028862,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.2600533962249756
+      },
+      {
+        "doc_id": "doc_346",
+        "simrank_score": 0.007712780963629484,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.2554418742656708
+      },
+      {
+        "doc_id": "doc_198",
+        "simrank_score": 0.0026340484619140625,
+        "horn_score": 0.7960933556468939,
+        "embedding_score": 0.21829429268836975
+      },
+      {
+        "doc_id": "doc_243",
+        "simrank_score": 0.006607459392398596,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.26113492250442505
+      },
+      {
+        "doc_id": "doc_25",
+        "simrank_score": 0.006076603662222624,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.27105167508125305
+      },
+      {
+        "doc_id": "doc_253",
+        "simrank_score": 0.0007718134438619018,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.27808812260627747
+      },
+      {
+        "doc_id": "doc_275",
+        "simrank_score": 0.006944812368601561,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.2488137185573578
+      },
+      {
+        "doc_id": "doc_99",
+        "simrank_score": 0.0010074495803564787,
+        "horn_score": 0.7960933556468939,
+        "embedding_score": 0.21675512194633484
+      },
+      {
+        "doc_id": "doc_101",
+        "simrank_score": 0.0010074495803564787,
+        "horn_score": 0.7960933556468939,
+        "embedding_score": 0.21675512194633484
+      },
+      {
+        "doc_id": "doc_44",
+        "simrank_score": 0.005286386702209711,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.3678121566772461
+      },
+      {
+        "doc_id": "doc_39",
+        "simrank_score": 0.00459281075745821,
+        "horn_score": 0.5337374779353409,
+        "embedding_score": 0.469603031873703
+      },
+      {
+        "doc_id": "doc_37",
+        "simrank_score": 0.0045887259766459465,
+        "horn_score": 0.5337374779353409,
+        "embedding_score": 0.469603031873703
+      },
+      {
+        "doc_id": "doc_5",
+        "simrank_score": 0.011887305416166782,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.25402361154556274
+      },
+      {
+        "doc_id": "doc_296",
+        "simrank_score": 0.08763213455677032,
+        "horn_score": 0.6347569577018577,
+        "embedding_score": 0.254874050617218
+      },
+      {
+        "doc_id": "doc_236",
+        "simrank_score": 0.007585149258375168,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.36009493470191956
+      },
+      {
+        "doc_id": "doc_29",
+        "simrank_score": 0.0056112040765583515,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.2759794294834137
+      },
+      {
+        "doc_id": "doc_83",
+        "simrank_score": 0.009380530565977097,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.23148973286151886
+      },
+      {
+        "doc_id": "doc_60",
+        "simrank_score": 0.005895348731428385,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.2295263707637787
+      },
+      {
+        "doc_id": "doc_351",
+        "simrank_score": 0.06713758409023285,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.18126364052295685
+      },
+      {
+        "doc_id": "doc_28",
+        "simrank_score": 0.014355259947478771,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.24650272727012634
+      },
+      {
+        "doc_id": "doc_327",
+        "simrank_score": 0.0720849260687828,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.2556918263435364
+      },
+      {
+        "doc_id": "doc_352",
+        "simrank_score": 0.0006034434190951288,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.23811669647693634
+      },
+      {
+        "doc_id": "doc_1",
+        "simrank_score": 0.006805424578487873,
+        "horn_score": 0.5337071596261936,
+        "embedding_score": 0.4414358139038086
+      },
+      {
+        "doc_id": "doc_226",
+        "simrank_score": 0.006805424578487873,
+        "horn_score": 0.5337071596261936,
+        "embedding_score": 0.4414358139038086
+      },
+      {
+        "doc_id": "doc_3",
+        "simrank_score": 0.006672534625977278,
+        "horn_score": 0.5337071596261936,
+        "embedding_score": 0.4414358139038086
+      },
+      {
+        "doc_id": "doc_149",
+        "simrank_score": 0.001212408416904509,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.3522641062736511
+      },
+      {
+        "doc_id": "doc_147",
+        "simrank_score": 0.001191475661471486,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.3522641062736511
+      },
+      {
+        "doc_id": "doc_206",
+        "simrank_score": 0.0046981084160506725,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.3355884552001953
+      },
+      {
+        "doc_id": "doc_323",
+        "simrank_score": 0.004257524851709604,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.33492040634155273
+      },
+      {
+        "doc_id": "doc_330",
+        "simrank_score": 5.3687472245655954e-05,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.22918948531150818
+      },
+      {
+        "doc_id": "doc_278",
+        "simrank_score": 0.06052584573626518,
+        "horn_score": 0.6891886369327079,
+        "embedding_score": 0.2044619917869568
+      },
+      {
+        "doc_id": "doc_191",
+        "simrank_score": 0.0011465438874438405,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.2353062480688095
+      },
+      {
+        "doc_id": "doc_193",
+        "simrank_score": 0.0011465438874438405,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.2353062480688095
+      },
+      {
+        "doc_id": "doc_171",
+        "simrank_score": 0.0007325015030801296,
+        "horn_score": 0.7960933556468939,
+        "embedding_score": 0.17183825373649597
+      },
+      {
+        "doc_id": "doc_170",
+        "simrank_score": 0.0007235688390210271,
+        "horn_score": 0.7960933556468939,
+        "embedding_score": 0.17183825373649597
+      },
+      {
+        "doc_id": "doc_264",
+        "simrank_score": 0.08498980104923248,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.2261110544204712
+      },
+      {
+        "doc_id": "doc_10",
+        "simrank_score": 0.007542128674685955,
+        "horn_score": 0.5337374779353409,
+        "embedding_score": 0.4212535321712494
+      },
+      {
+        "doc_id": "doc_227",
+        "simrank_score": 0.007542128674685955,
+        "horn_score": 0.5337374779353409,
+        "embedding_score": 0.4212535321712494
+      },
+      {
+        "doc_id": "doc_230",
+        "simrank_score": 0.007542128674685955,
+        "horn_score": 0.5337374779353409,
+        "embedding_score": 0.4212535321712494
+      },
+      {
+        "doc_id": "doc_184",
+        "simrank_score": 0.002343342639505863,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.2014417201280594
+      },
+      {
+        "doc_id": "doc_185",
+        "simrank_score": 0.002194839296862483,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.2014417201280594
+      },
+      {
+        "doc_id": "doc_273",
+        "simrank_score": 0.0013576141791418195,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.21249721944332123
+      },
+      {
+        "doc_id": "doc_41",
+        "simrank_score": 0.004625808913260698,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.3182092607021332
+      },
+      {
+        "doc_id": "doc_270",
+        "simrank_score": 0.0006908692303113639,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.28051602840423584
+      },
+      {
+        "doc_id": "doc_295",
+        "simrank_score": 3.7215257179923356e-05,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.21302591264247894
+      },
+      {
+        "doc_id": "doc_274",
+        "simrank_score": 0.005641615949571133,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.21316275000572205
+      },
+      {
+        "doc_id": "doc_233",
+        "simrank_score": 0.0010889653349295259,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.20905280113220215
+      },
+      {
+        "doc_id": "doc_285",
+        "simrank_score": 0.00035487907007336617,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.20986032485961914
+      },
+      {
+        "doc_id": "doc_139",
+        "simrank_score": 2.3161076967426197e-07,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.23514002561569214
+      },
+      {
+        "doc_id": "doc_320",
+        "simrank_score": 0.005225765518844128,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.2128525674343109
+      },
+      {
+        "doc_id": "doc_334",
+        "simrank_score": 0.005225765518844128,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.2128525674343109
+      },
+      {
+        "doc_id": "doc_0",
+        "simrank_score": 0.0058978525921702385,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.19168721139431
+      },
+      {
+        "doc_id": "doc_88",
+        "simrank_score": 0.0074864719063043594,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.1886797398328781
+      },
+      {
+        "doc_id": "doc_86",
+        "simrank_score": 0.007415771484375,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.1886797398328781
+      },
+      {
+        "doc_id": "doc_332",
+        "simrank_score": 0.05006657540798187,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.13140377402305603
+      },
+      {
+        "doc_id": "doc_84",
+        "simrank_score": 0.045289501547813416,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.17056849598884583
+      },
+      {
+        "doc_id": "doc_322",
+        "simrank_score": 0.007046068087220192,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.3073921799659729
+      },
+      {
+        "doc_id": "doc_51",
+        "simrank_score": 0.001491822418756783,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.2115272581577301
+      },
+      {
+        "doc_id": "doc_229",
+        "simrank_score": 0.001491822418756783,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.2115272581577301
+      },
+      {
+        "doc_id": "doc_66",
+        "simrank_score": 0.0052495901472866535,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.2063598334789276
+      },
+      {
+        "doc_id": "doc_75",
+        "simrank_score": 0.003814143128693104,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.31556200981140137
+      },
+      {
+        "doc_id": "doc_122",
+        "simrank_score": 0.009255078621208668,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.18814826011657715
+      },
+      {
+        "doc_id": "doc_216",
+        "simrank_score": 0.009255078621208668,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.18814826011657715
+      },
+      {
+        "doc_id": "doc_154",
+        "simrank_score": 0.009897705167531967,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.3049834966659546
+      },
+      {
+        "doc_id": "doc_155",
+        "simrank_score": 0.009897705167531967,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.3049834966659546
+      },
+      {
+        "doc_id": "doc_214",
+        "simrank_score": 0.01799979992210865,
+        "horn_score": 0.35741500180385355,
+        "embedding_score": 0.5620417594909668
+      },
+      {
+        "doc_id": "doc_218",
+        "simrank_score": 0.01799979992210865,
+        "horn_score": 0.35741500180385355,
+        "embedding_score": 0.5620417594909668
+      },
+      {
+        "doc_id": "doc_228",
+        "simrank_score": 0.01799979992210865,
+        "horn_score": 0.35741500180385355,
+        "embedding_score": 0.5620417594909668
+      },
+      {
+        "doc_id": "doc_145",
+        "simrank_score": 5.470399264595471e-05,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.19618985056877136
+      },
+      {
+        "doc_id": "doc_148",
+        "simrank_score": 5.3914860473014414e-05,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.19618985056877136
+      },
+      {
+        "doc_id": "doc_360",
+        "simrank_score": 0.0015779619570821524,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.041572947055101395
+      },
+      {
+        "doc_id": "doc_258",
+        "simrank_score": 0.0002632139076013118,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.18413418531417847
+      },
+      {
+        "doc_id": "doc_215",
+        "simrank_score": 0.004666091874241829,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.30663686990737915
+      },
+      {
+        "doc_id": "doc_14",
+        "simrank_score": 0.00458117201924324,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.30663686990737915
+      },
+      {
+        "doc_id": "doc_15",
+        "simrank_score": 0.005565946456044912,
+        "horn_score": 0.5337374779353409,
+        "embedding_score": 0.39684098958969116
+      },
+      {
+        "doc_id": "doc_210",
+        "simrank_score": 0.006042436696588993,
+        "horn_score": 0.6891886369327079,
+        "embedding_score": 0.23854628205299377
+      },
+      {
+        "doc_id": "doc_31",
+        "simrank_score": 0.0037168185226619244,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.1674833595752716
+      },
+      {
+        "doc_id": "doc_42",
+        "simrank_score": 0.000982618541456759,
+        "horn_score": 0.596838566491037,
+        "embedding_score": 0.3233588933944702
+      },
+      {
+        "doc_id": "doc_45",
+        "simrank_score": 0.005724155344069004,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.27739229798316956
+      },
+      {
+        "doc_id": "doc_179",
+        "simrank_score": 7.461971836164594e-05,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.0220162495970726
+      },
+      {
+        "doc_id": "doc_177",
+        "simrank_score": 7.254110823851079e-05,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.0220162495970726
+      },
+      {
+        "doc_id": "doc_43",
+        "simrank_score": 0.0056303879246115685,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.27739229798316956
+      },
+      {
+        "doc_id": "doc_53",
+        "simrank_score": 0.0558607392013073,
+        "horn_score": 0.6347569577018577,
+        "embedding_score": 0.21044963598251343
+      },
+      {
+        "doc_id": "doc_194",
+        "simrank_score": 0.0009381180861964822,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.17934539914131165
+      },
+      {
+        "doc_id": "doc_196",
+        "simrank_score": 0.0009381180861964822,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.17934539914131165
+      },
+      {
+        "doc_id": "doc_23",
+        "simrank_score": 8.05884919827804e-05,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.17040249705314636
+      },
+      {
+        "doc_id": "doc_124",
+        "simrank_score": 0.016270244494080544,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.13832181692123413
+      },
+      {
+        "doc_id": "doc_52",
+        "simrank_score": 0.005259665194898844,
+        "horn_score": 0.6347569577018577,
+        "embedding_score": 0.2740509808063507
+      },
+      {
+        "doc_id": "doc_166",
+        "simrank_score": 0.002271002158522606,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.27900272607803345
+      },
+      {
+        "doc_id": "doc_164",
+        "simrank_score": 0.0021719075739383698,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.27900272607803345
+      },
+      {
+        "doc_id": "doc_96",
+        "simrank_score": 0.0033993080724030733,
+        "horn_score": 0.6412647582562178,
+        "embedding_score": 0.26309168338775635
+      },
+      {
+        "doc_id": "doc_100",
+        "simrank_score": 0.0033993080724030733,
+        "horn_score": 0.6412647582562178,
+        "embedding_score": 0.26309168338775635
+      },
+      {
+        "doc_id": "doc_207",
+        "simrank_score": 0.003122095949947834,
+        "horn_score": 0.596838566491037,
+        "embedding_score": 0.30444279313087463
+      },
+      {
+        "doc_id": "doc_202",
+        "simrank_score": 0.00544747756794095,
+        "horn_score": 0.5816310383026838,
+        "embedding_score": 0.3163710832595825
+      },
+      {
+        "doc_id": "doc_204",
+        "simrank_score": 0.00544747756794095,
+        "horn_score": 0.5816310383026838,
+        "embedding_score": 0.3163710832595825
+      },
+      {
+        "doc_id": "doc_367",
+        "simrank_score": 0.010491509921848774,
+        "horn_score": 0.596838566491037,
+        "embedding_score": 0.29326871037483215
+      },
+      {
+        "doc_id": "doc_36",
+        "simrank_score": 0.009733977727591991,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.25562334060668945
+      },
+      {
+        "doc_id": "doc_38",
+        "simrank_score": 0.009733977727591991,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.25562334060668945
+      },
+      {
+        "doc_id": "doc_212",
+        "simrank_score": 0.004039889667183161,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.26304081082344055
+      },
+      {
+        "doc_id": "doc_167",
+        "simrank_score": 0.004889356438070536,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.2683551609516144
+      },
+      {
+        "doc_id": "doc_169",
+        "simrank_score": 0.004889356438070536,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.2683551609516144
+      },
+      {
+        "doc_id": "doc_156",
+        "simrank_score": 3.869589272653684e-05,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.15436255931854248
+      },
+      {
+        "doc_id": "doc_158",
+        "simrank_score": 3.869589272653684e-05,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.15436255931854248
+      },
+      {
+        "doc_id": "doc_294",
+        "simrank_score": 0.007471176795661449,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.25552624464035034
+      },
+      {
+        "doc_id": "doc_63",
+        "simrank_score": 0.00021615753939840943,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.1435120403766632
+      },
+      {
+        "doc_id": "doc_65",
+        "simrank_score": 0.00021615753939840943,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.1435120403766632
+      },
+      {
+        "doc_id": "doc_315",
+        "simrank_score": 3.452856560670625e-07,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_361",
+        "simrank_score": 3.499995386846422e-07,
+        "horn_score": 0.8980466778234469,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_256",
+        "simrank_score": 2.465065881551709e-05,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.14809295535087585
+      },
+      {
+        "doc_id": "doc_338",
+        "simrank_score": 2.3673095711274073e-05,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.14809295535087585
+      },
+      {
+        "doc_id": "doc_318",
+        "simrank_score": 0.007793575059622526,
+        "horn_score": 0.596838566491037,
+        "embedding_score": 0.28573670983314514
+      },
+      {
+        "doc_id": "doc_153",
+        "simrank_score": 0.00018333358457311988,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.2570393979549408
+      },
+      {
+        "doc_id": "doc_151",
+        "simrank_score": 0.00018065606127493083,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.2570393979549408
+      },
+      {
+        "doc_id": "doc_200",
+        "simrank_score": 0.007732588332146406,
+        "horn_score": 0.5816310383026838,
+        "embedding_score": 0.3001309037208557
+      },
+      {
+        "doc_id": "doc_201",
+        "simrank_score": 0.007732588332146406,
+        "horn_score": 0.5816310383026838,
+        "embedding_score": 0.3001309037208557
+      },
+      {
+        "doc_id": "doc_106",
+        "simrank_score": 0.0002162579185096547,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.2559886574745178
+      },
+      {
+        "doc_id": "doc_130",
+        "simrank_score": 0.0007695741951465607,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.1440478265285492
+      },
+      {
+        "doc_id": "doc_132",
+        "simrank_score": 0.0007695741951465607,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.1440478265285492
+      },
+      {
+        "doc_id": "doc_345",
+        "simrank_score": 0.0002938293037004769,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.14192438125610352
+      },
+      {
+        "doc_id": "doc_197",
+        "simrank_score": 0.005880479700863361,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.2455102503299713
+      },
+      {
+        "doc_id": "doc_199",
+        "simrank_score": 0.005855541210621595,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.2455102503299713
+      },
+      {
+        "doc_id": "doc_162",
+        "simrank_score": 0.0014662608737125993,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.13998562097549438
+      },
+      {
+        "doc_id": "doc_168",
+        "simrank_score": 0.0014662608737125993,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.13998562097549438
+      },
+      {
+        "doc_id": "doc_131",
+        "simrank_score": 6.0583410231629387e-05,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.16556388139724731
+      },
+      {
+        "doc_id": "doc_325",
+        "simrank_score": 0.004013834521174431,
+        "horn_score": 0.5186489585961573,
+        "embedding_score": 0.36271750926971436
+      },
+      {
+        "doc_id": "doc_34",
+        "simrank_score": 0.00483203399926424,
+        "horn_score": 0.596838566491037,
+        "embedding_score": 0.280510276556015
+      },
+      {
+        "doc_id": "doc_195",
+        "simrank_score": 0.0002826934214681387,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.12234288454055786
+      },
+      {
+        "doc_id": "doc_125",
+        "simrank_score": 0.020670752972364426,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.1279369592666626
+      },
+      {
+        "doc_id": "doc_239",
+        "simrank_score": 0.004726678133010864,
+        "horn_score": 0.7960933556468939,
+        "embedding_score": 0.07350075989961624
+      },
+      {
+        "doc_id": "doc_12",
+        "simrank_score": 0.0058055054396390915,
+        "horn_score": 0.5276946383640244,
+        "embedding_score": 0.339316725730896
+      },
+      {
+        "doc_id": "doc_291",
+        "simrank_score": 0.0005764251109212637,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.1255682408809662
+      },
+      {
+        "doc_id": "doc_324",
+        "simrank_score": 0.0005764251109212637,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.1255682408809662
+      },
+      {
+        "doc_id": "doc_238",
+        "simrank_score": 0.08464954793453217,
+        "horn_score": 0.5136621568516484,
+        "embedding_score": 0.2461392879486084
+      },
+      {
+        "doc_id": "doc_137",
+        "simrank_score": 2.3148826585384086e-05,
+        "horn_score": 0.5917501591672232,
+        "embedding_score": 0.2805007994174957
+      },
+      {
+        "doc_id": "doc_134",
+        "simrank_score": 2.2895910660736263e-05,
+        "horn_score": 0.5917501591672232,
+        "embedding_score": 0.2805007994174957
+      },
+      {
+        "doc_id": "doc_331",
+        "simrank_score": 0.0767904669046402,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.0871163010597229
+      },
+      {
+        "doc_id": "doc_362",
+        "simrank_score": 0.0002213381085311994,
+        "horn_score": 0.7960933556468939,
+        "embedding_score": 0.06710545718669891
+      },
+      {
+        "doc_id": "doc_9",
+        "simrank_score": 0.005183144472539425,
+        "horn_score": 0.5816310383026838,
+        "embedding_score": 0.27479350566864014
+      },
+      {
+        "doc_id": "doc_267",
+        "simrank_score": 0.0007267354521900415,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.18399837613105774
+      },
+      {
+        "doc_id": "doc_7",
+        "simrank_score": 0.004270980600267649,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.11900448799133301
+      },
+      {
+        "doc_id": "doc_251",
+        "simrank_score": 0.0001550972374388948,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.10764250159263611
+      },
+      {
+        "doc_id": "doc_73",
+        "simrank_score": 0.004859962034970522,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.21196907758712769
+      },
+      {
+        "doc_id": "doc_307",
+        "simrank_score": 6.153831054689363e-05,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.12936365604400635
+      },
+      {
+        "doc_id": "doc_245",
+        "simrank_score": 0.0046384199522435665,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.10726515203714371
+      },
+      {
+        "doc_id": "doc_343",
+        "simrank_score": 2.4492352167726494e-05,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.1274912804365158
+      },
+      {
+        "doc_id": "doc_55",
+        "simrank_score": 0.0226229690015316,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.18365934491157532
+      },
+      {
+        "doc_id": "doc_305",
+        "simrank_score": 0.0002037115627899766,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.1704477071762085
+      },
+      {
+        "doc_id": "doc_247",
+        "simrank_score": 0.00033334759064018726,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.11171836405992508
+      },
+      {
+        "doc_id": "doc_57",
+        "simrank_score": 0.020670752972364426,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.18365934491157532
+      },
+      {
+        "doc_id": "doc_306",
+        "simrank_score": 3.7461810279637575e-05,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.09346883744001389
+      },
+      {
+        "doc_id": "doc_341",
+        "simrank_score": 0.004269718192517757,
+        "horn_score": 0.6347569577018577,
+        "embedding_score": 0.19747622311115265
+      },
+      {
+        "doc_id": "doc_246",
+        "simrank_score": 0.0006609843112528324,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.15741872787475586
+      },
+      {
+        "doc_id": "doc_72",
+        "simrank_score": 0.002505621872842312,
+        "horn_score": 0.6412647582562178,
+        "embedding_score": 0.19158826768398285
+      },
+      {
+        "doc_id": "doc_26",
+        "simrank_score": 0.0007708932971581817,
+        "horn_score": 0.6891886369327079,
+        "embedding_score": 0.14309942722320557
+      },
+      {
+        "doc_id": "doc_176",
+        "simrank_score": 0.00010108447895618156,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.08524685353040695
+      },
+      {
+        "doc_id": "doc_213",
+        "simrank_score": 4.02428959205281e-05,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.19580455124378204
+      },
+      {
+        "doc_id": "doc_6",
+        "simrank_score": 0.005489523988217115,
+        "horn_score": 0.5816310383026838,
+        "embedding_score": 0.23969607055187225
+      },
+      {
+        "doc_id": "doc_32",
+        "simrank_score": 0.008127622306346893,
+        "horn_score": 0.5816310383026838,
+        "embedding_score": 0.2324661910533905
+      },
+      {
+        "doc_id": "doc_287",
+        "simrank_score": 0.01590590551495552,
+        "horn_score": 0.596838566491037,
+        "embedding_score": 0.20397987961769104
+      },
+      {
+        "doc_id": "doc_209",
+        "simrank_score": 0.0010256756795570254,
+        "horn_score": 0.596838566491037,
+        "embedding_score": 0.22261348366737366
+      },
+      {
+        "doc_id": "doc_4",
+        "simrank_score": 0.0058444165624678135,
+        "horn_score": 0.5816310383026838,
+        "embedding_score": 0.22875237464904785
+      },
+      {
+        "doc_id": "doc_2",
+        "simrank_score": 0.0058228797279298306,
+        "horn_score": 0.5816310383026838,
+        "embedding_score": 0.22875237464904785
+      },
+      {
+        "doc_id": "doc_182",
+        "simrank_score": 0.000925338885281235,
+        "horn_score": 0.6412647582562178,
+        "embedding_score": 0.1688830554485321
+      },
+      {
+        "doc_id": "doc_180",
+        "simrank_score": 0.0009190465207211673,
+        "horn_score": 0.6412647582562178,
+        "embedding_score": 0.1688830554485321
+      },
+      {
+        "doc_id": "doc_309",
+        "simrank_score": 0.0002781925431918353,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.06376286596059799
+      },
+      {
+        "doc_id": "doc_329",
+        "simrank_score": 0.0010942104272544384,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.051284465938806534
+      },
+      {
+        "doc_id": "doc_365",
+        "simrank_score": 0.0010942104272544384,
+        "horn_score": 0.7565046384679052,
+        "embedding_score": 0.051284465938806534
+      },
+      {
+        "doc_id": "doc_290",
+        "simrank_score": 4.3116494907735614e-07,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.08745704591274261
+      },
+      {
+        "doc_id": "doc_61",
+        "simrank_score": 0.002320617903023958,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.06548291444778442
+      },
+      {
+        "doc_id": "doc_70",
+        "simrank_score": 0.006398418918251991,
+        "horn_score": 0.6021680083337573,
+        "embedding_score": 0.1887810230255127
+      },
+      {
+        "doc_id": "doc_255",
+        "simrank_score": 0.0006048991344869137,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.1189635694026947
+      },
+      {
+        "doc_id": "doc_71",
+        "simrank_score": 0.0026957967784255743,
+        "horn_score": 0.5337829553990618,
+        "embedding_score": 0.2604322135448456
+      },
+      {
+        "doc_id": "doc_67",
+        "simrank_score": 0.00022634126071352512,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.07412592321634293
+      },
+      {
+        "doc_id": "doc_304",
+        "simrank_score": 0.0001968698634300381,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.11403815448284149
+      },
+      {
+        "doc_id": "doc_105",
+        "simrank_score": 0.003987596835941076,
+        "horn_score": 0.596838566491037,
+        "embedding_score": 0.18628454208374023
+      },
+      {
+        "doc_id": "doc_33",
+        "simrank_score": 0.0020966469310224056,
+        "horn_score": 0.6352466176387364,
+        "embedding_score": 0.14940916001796722
+      },
+      {
+        "doc_id": "doc_310",
+        "simrank_score": 2.67677733063465e-05,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.10909995436668396
+      },
+      {
+        "doc_id": "doc_328",
+        "simrank_score": 0.00016448524547740817,
+        "horn_score": 0.596838566491037,
+        "embedding_score": 0.18925221264362335
+      },
+      {
+        "doc_id": "doc_114",
+        "simrank_score": 0.002371854381635785,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.045545175671577454
+      },
+      {
+        "doc_id": "doc_116",
+        "simrank_score": 0.002371854381635785,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.045545175671577454
+      },
+      {
+        "doc_id": "doc_107",
+        "simrank_score": 0.0008090486517176032,
+        "horn_score": 0.5186489585961573,
+        "embedding_score": 0.2653515934944153
+      },
+      {
+        "doc_id": "doc_353",
+        "simrank_score": 0.004361929837614298,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.09481561183929443
+      },
+      {
+        "doc_id": "doc_266",
+        "simrank_score": 0.00020409401622600853,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.0998208224773407
+      },
+      {
+        "doc_id": "doc_359",
+        "simrank_score": 2.5695848307805136e-05,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.09945555031299591
+      },
+      {
+        "doc_id": "doc_89",
+        "simrank_score": 2.6245706976624206e-05,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.04052917659282684
+      },
+      {
+        "doc_id": "doc_208",
+        "simrank_score": 6.724984268657863e-05,
+        "horn_score": 0.596838566491037,
+        "embedding_score": 0.1744042932987213
+      },
+      {
+        "doc_id": "doc_142",
+        "simrank_score": 0.0038352839183062315,
+        "horn_score": 0.40325201250063586,
+        "embedding_score": 0.36222368478775024
+      },
+      {
+        "doc_id": "doc_144",
+        "simrank_score": 0.0038352839183062315,
+        "horn_score": 0.40325201250063586,
+        "embedding_score": 0.36222368478775024
+      },
+      {
+        "doc_id": "doc_355",
+        "simrank_score": 0.0002023369015660137,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.09160623699426651
+      },
+      {
+        "doc_id": "doc_192",
+        "simrank_score": 0.0012286421842873096,
+        "horn_score": 0.5993037086313686,
+        "embedding_score": 0.16903363168239594
+      },
+      {
+        "doc_id": "doc_301",
+        "simrank_score": 0.00027397627127356827,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.09121639281511307
+      },
+      {
+        "doc_id": "doc_80",
+        "simrank_score": 7.057745096972212e-05,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.04764057323336601
+      },
+      {
+        "doc_id": "doc_62",
+        "simrank_score": 0.05599447712302208,
+        "horn_score": 0.5236357603406662,
+        "embedding_score": 0.16827696561813354
+      },
+      {
+        "doc_id": "doc_64",
+        "simrank_score": 0.05599447712302208,
+        "horn_score": 0.5236357603406662,
+        "embedding_score": 0.16827696561813354
+      },
+      {
+        "doc_id": "doc_312",
+        "simrank_score": 5.69757103221491e-05,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.01961948536336422
+      },
+      {
+        "doc_id": "doc_104",
+        "simrank_score": 0.006017843261361122,
+        "horn_score": 0.5488167074799708,
+        "embedding_score": 0.20796772837638855
+      },
+      {
+        "doc_id": "doc_356",
+        "simrank_score": 0.00029211293440312147,
+        "horn_score": 0.6388756405523536,
+        "embedding_score": 0.12398423254489899
+      },
+      {
+        "doc_id": "doc_319",
+        "simrank_score": 4.212165833905601e-07,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.08077680319547653
+      },
+      {
+        "doc_id": "doc_279",
+        "simrank_score": 0.00015534576959908009,
+        "horn_score": 0.6388756405523536,
+        "embedding_score": 0.11956828832626343
+      },
+      {
+        "doc_id": "doc_326",
+        "simrank_score": 0.004414588212966919,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.1239524781703949
+      },
+      {
+        "doc_id": "doc_349",
+        "simrank_score": 4.199504815005639e-07,
+        "horn_score": 0.6388756405523536,
+        "embedding_score": 0.11839946359395981
+      },
+      {
+        "doc_id": "doc_85",
+        "simrank_score": 4.0822718005983916e-07,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.00783473439514637
+      },
+      {
+        "doc_id": "doc_87",
+        "simrank_score": 4.0822718005983916e-07,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.00783473439514637
+      },
+      {
+        "doc_id": "doc_217",
+        "simrank_score": 0.005802543833851814,
+        "horn_score": 0.5276946383640244,
+        "embedding_score": 0.21605035662651062
+      },
+      {
+        "doc_id": "doc_27",
+        "simrank_score": 0.005684095900505781,
+        "horn_score": 0.5276946383640244,
+        "embedding_score": 0.21605035662651062
+      },
+      {
+        "doc_id": "doc_159",
+        "simrank_score": 3.6694632399303373e-07,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.0025010909885168076
+      },
+      {
+        "doc_id": "doc_165",
+        "simrank_score": 3.6694632399303373e-07,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.0025010909885168076
+      },
+      {
+        "doc_id": "doc_248",
+        "simrank_score": 0.0002054607612080872,
+        "horn_score": 0.6196498587735666,
+        "embedding_score": 0.1271706223487854
+      },
+      {
+        "doc_id": "doc_241",
+        "simrank_score": 1.4308134268503636e-06,
+        "horn_score": 0.7464332391823777,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_237",
+        "simrank_score": 0.0006073334952816367,
+        "horn_score": 0.596838566491037,
+        "embedding_score": 0.14642579853534698
+      },
+      {
+        "doc_id": "doc_188",
+        "simrank_score": 1.979527405637782e-05,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.020020771771669388
+      },
+      {
+        "doc_id": "doc_186",
+        "simrank_score": 1.9577308194129728e-05,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.020020771771669388
+      },
+      {
+        "doc_id": "doc_368",
+        "simrank_score": 0.0006969535024836659,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.06228417158126831
+      },
+      {
+        "doc_id": "doc_8",
+        "simrank_score": 0.004753321874886751,
+        "horn_score": 0.6388756405523536,
+        "embedding_score": 0.0928393304347992
+      },
+      {
+        "doc_id": "doc_126",
+        "simrank_score": 0.0002341265935683623,
+        "horn_score": 0.7367102798784108,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_235",
+        "simrank_score": 5.447733201435767e-05,
+        "horn_score": 0.5276946383640244,
+        "embedding_score": 0.20922747254371643
+      },
+      {
+        "doc_id": "doc_269",
+        "simrank_score": 0.0003098112065345049,
+        "horn_score": 0.6388756405523536,
+        "embedding_score": 0.09347787499427795
+      },
+      {
+        "doc_id": "doc_16",
+        "simrank_score": 0.0007062092772684991,
+        "horn_score": 0.398422276639961,
+        "embedding_score": 0.3275347650051117
+      },
+      {
+        "doc_id": "doc_18",
+        "simrank_score": 0.0007062092772684991,
+        "horn_score": 0.398422276639961,
+        "embedding_score": 0.3275347650051117
+      },
+      {
+        "doc_id": "doc_358",
+        "simrank_score": 3.680819702367444e-07,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.048050329089164734
+      },
+      {
+        "doc_id": "doc_160",
+        "simrank_score": 2.1967912289255764e-07,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_161",
+        "simrank_score": 2.134636787332056e-07,
+        "horn_score": 0.7216031809501198,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_110",
+        "simrank_score": 2.6015770345111378e-05,
+        "horn_score": 0.5276946383640244,
+        "embedding_score": 0.19089001417160034
+      },
+      {
+        "doc_id": "doc_21",
+        "simrank_score": 0.00022548723791260272,
+        "horn_score": 0.5816310383026838,
+        "embedding_score": 0.13648159801959991
+      },
+      {
+        "doc_id": "doc_263",
+        "simrank_score": 0.0039091263897717,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.03099190816283226
+      },
+      {
+        "doc_id": "doc_366",
+        "simrank_score": 4.975343108526431e-05,
+        "horn_score": 0.5680842392851428,
+        "embedding_score": 0.141060009598732
+      },
+      {
+        "doc_id": "doc_357",
+        "simrank_score": 0.0037016163114458323,
+        "horn_score": 0.4734205597568215,
+        "embedding_score": 0.2262827605009079
+      },
+      {
+        "doc_id": "doc_276",
+        "simrank_score": 2.4383209165534936e-05,
+        "horn_score": 0.5680842392851428,
+        "embedding_score": 0.13453513383865356
+      },
+      {
+        "doc_id": "doc_102",
+        "simrank_score": 0.0008157587726600468,
+        "horn_score": 0.5337829553990618,
+        "embedding_score": 0.16598893702030182
+      },
+      {
+        "doc_id": "doc_262",
+        "simrank_score": 0.0008196019916795194,
+        "horn_score": 0.596838566491037,
+        "embedding_score": 0.10253934562206268
+      },
+      {
+        "doc_id": "doc_364",
+        "simrank_score": 0.0008196019916795194,
+        "horn_score": 0.596838566491037,
+        "embedding_score": 0.10253934562206268
+      },
+      {
+        "doc_id": "doc_293",
+        "simrank_score": 5.2699972002301365e-05,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.020137537270784378
+      },
+      {
+        "doc_id": "doc_302",
+        "simrank_score": 5.2699972002301365e-05,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.020137537270784378
+      },
+      {
+        "doc_id": "doc_109",
+        "simrank_score": 2.3822316506993957e-05,
+        "horn_score": 0.5276946383640244,
+        "embedding_score": 0.1692383736371994
+      },
+      {
+        "doc_id": "doc_108",
+        "simrank_score": 0.00018103615730069578,
+        "horn_score": 0.4414806435290834,
+        "embedding_score": 0.2514617443084717
+      },
+      {
+        "doc_id": "doc_317",
+        "simrank_score": 0.0003693676844704896,
+        "horn_score": 0.5680842392851428,
+        "embedding_score": 0.11789815127849579
+      },
+      {
+        "doc_id": "doc_297",
+        "simrank_score": 3.91352477890905e-05,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_242",
+        "simrank_score": 3.3949888234019454e-07,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_261",
+        "simrank_score": 3.420176710733358e-07,
+        "horn_score": 0.6781800693259887,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_244",
+        "simrank_score": 0.00021029877825640142,
+        "horn_score": 0.5236357603406662,
+        "embedding_score": 0.14803019165992737
+      },
+      {
+        "doc_id": "doc_339",
+        "simrank_score": 4.215790738726355e-07,
+        "horn_score": 0.6276930681745908,
+        "embedding_score": 0.04403175786137581
+      },
+      {
+        "doc_id": "doc_298",
+        "simrank_score": 0.0007003732025623322,
+        "horn_score": 0.4734205597568215,
+        "embedding_score": 0.18924400210380554
+      },
+      {
+        "doc_id": "doc_205",
+        "simrank_score": 0.0007793306722305715,
+        "horn_score": 0.5337374779353409,
+        "embedding_score": 0.11994347721338272
+      },
+      {
+        "doc_id": "doc_103",
+        "simrank_score": 0.001070681493729353,
+        "horn_score": 0.5186489585961573,
+        "embedding_score": 0.13340328633785248
+      },
+      {
+        "doc_id": "doc_119",
+        "simrank_score": 0.001287100138142705,
+        "horn_score": 0.4734205597568215,
+        "embedding_score": 0.167723149061203
+      },
+      {
+        "doc_id": "doc_118",
+        "simrank_score": 0.0031839150469750166,
+        "horn_score": 0.4734205597568215,
+        "embedding_score": 0.1628342717885971
+      },
+      {
+        "doc_id": "doc_288",
+        "simrank_score": 1.2320481346250745e-06,
+        "horn_score": 0.6388756405523536,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_308",
+        "simrank_score": 1.1798803143392433e-06,
+        "horn_score": 0.6388756405523536,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_35",
+        "simrank_score": 0.0009735471103340387,
+        "horn_score": 0.37244655745402566,
+        "embedding_score": 0.2564390301704407
+      },
+      {
+        "doc_id": "doc_40",
+        "simrank_score": 0.0009735471103340387,
+        "horn_score": 0.37244655745402566,
+        "embedding_score": 0.2564390301704407
+      },
+      {
+        "doc_id": "doc_350",
+        "simrank_score": 0.000909964379388839,
+        "horn_score": 0.4618971373843266,
+        "embedding_score": 0.15746764838695526
+      },
+      {
+        "doc_id": "doc_24",
+        "simrank_score": 0.0001788918161764741,
+        "horn_score": 0.5993037086313686,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_257",
+        "simrank_score": 2.026808215305209e-05,
+        "horn_score": 0.5917501591672232,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_277",
+        "simrank_score": 3.5108695328744943e-07,
+        "horn_score": 0.5917501591672232,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_289",
+        "simrank_score": 3.5108695328744943e-07,
+        "horn_score": 0.5917501591672232,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_157",
+        "simrank_score": 2.265293943537472e-07,
+        "horn_score": 0.5917501591672232,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_163",
+        "simrank_score": 2.3139078564327065e-07,
+        "horn_score": 0.5917501591672232,
+        "embedding_score": 0.0
+      },
+      {
+        "doc_id": "doc_321",
+        "simrank_score": 0.00020505550492089242,
+        "horn_score": 0.4734205597568215,
+        "embedding_score": 0.0956123024225235
+      },
+      {
+        "doc_id": "doc_111",
+        "simrank_score": 0.001177338999696076,
+        "horn_score": 0.4734205597568215,
+        "embedding_score": 0.0906287282705307
+      },
+      {
+        "doc_id": "doc_81",
+        "simrank_score": 0.000539311149623245,
+        "horn_score": 0.5236357603406662,
+        "embedding_score": 0.01968907192349434
+      },
+      {
+        "doc_id": "doc_82",
+        "simrank_score": 5.310854976414703e-05,
+        "horn_score": 0.5236357603406662,
+        "embedding_score": 0.02029227279126644
+      },
+      {
+        "doc_id": "doc_250",
+        "simrank_score": 0.0008335035527125001,
+        "horn_score": 0.4734205597568215,
+        "embedding_score": 0.06782171130180359
+      },
+      {
+        "doc_id": "doc_211",
+        "simrank_score": 1.9511604477884248e-05,
+        "horn_score": 0.5136621568516484,
+        "embedding_score": 0.023874735459685326
+      },
+      {
+        "doc_id": "doc_113",
+        "simrank_score": 0.0007172195473685861,
+        "horn_score": 0.4734205597568215,
+        "embedding_score": 0.05009956657886505
+      },
+      {
+        "doc_id": "doc_115",
+        "simrank_score": 0.0007172195473685861,
+        "horn_score": 0.4734205597568215,
+        "embedding_score": 0.05009956657886505
+      },
+      {
+        "doc_id": "doc_120",
+        "simrank_score": 0.00019127530686091632,
+        "horn_score": 0.4734205597568215,
+        "embedding_score": 0.04862483590841293
+      },
+      {
+        "doc_id": "doc_69",
+        "simrank_score": 0.0008048543240875006,
+        "horn_score": 0.47548226120465414,
+        "embedding_score": 0.032211191952228546
+      },
+      {
+        "doc_id": "doc_303",
+        "simrank_score": 0.07337962090969086,
+        "horn_score": 0.0,
+        "embedding_score": 0.29591214656829834
+      },
+      {
+        "doc_id": "doc_311",
+        "simrank_score": 0.05326966941356659,
+        "horn_score": 0.0,
+        "embedding_score": 0.25840866565704346
+      },
+      {
+        "doc_id": "doc_348",
+        "simrank_score": 0.010518096387386322,
+        "horn_score": 0.1277009191217593,
+        "embedding_score": 0.18547068536281586
+      },
+      {
+        "doc_id": "doc_314",
+        "simrank_score": 0.004130176734179258,
+        "horn_score": 0.0,
+        "embedding_score": 0.27791452407836914
+      },
+      {
+        "doc_id": "doc_333",
+        "simrank_score": 0.005864445120096207,
+        "horn_score": 0.0,
+        "embedding_score": 0.27501001954078674
+      },
+      {
+        "doc_id": "doc_220",
+        "simrank_score": 0.0008273749845102429,
+        "horn_score": 0.1277009191217593,
+        "embedding_score": 0.1514468491077423
+      },
+      {
+        "doc_id": "doc_335",
+        "simrank_score": 0.07143893837928772,
+        "horn_score": 0.0,
+        "embedding_score": 0.13249030709266663
+      },
+      {
+        "doc_id": "doc_231",
+        "simrank_score": 3.092494296197401e-07,
+        "horn_score": 0.0,
+        "embedding_score": 0.13979113101959229
+      },
+      {
+        "doc_id": "doc_342",
+        "simrank_score": 0.006543995812535286,
+        "horn_score": 0.0,
+        "embedding_score": 0.12659496068954468
+      },
+      {
+        "doc_id": "doc_172",
+        "simrank_score": 0.00023968324239831418,
+        "horn_score": 0.0,
+        "embedding_score": 0.1315256655216217
+      },
+      {
+        "doc_id": "doc_173",
+        "simrank_score": 0.00023968324239831418,
+        "horn_score": 0.0,
+        "embedding_score": 0.1315256655216217
+      },
+      {
+        "doc_id": "doc_117",
+        "simrank_score": 0.00029764880309812725,
+        "horn_score": 0.0,
+        "embedding_score": 0.03958579897880554
+      },
+      {
+        "doc_id": "doc_112",
+        "simrank_score": 0.0002042848354903981,
+        "horn_score": 0.0,
+        "embedding_score": 0.03017021343111992
+      }
+    ]
+  }
+}

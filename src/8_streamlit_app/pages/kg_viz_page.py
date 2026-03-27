@@ -103,7 +103,7 @@ def create_pyvis_network(G_sub, layout='spring', physics=True):
 
     # Add edges
     for source, target, data in G_sub.edges(data=True):
-        edge_type = data.get('type', 'unknown')
+        edge_type = data.get('relation', data.get('type', 'unknown'))
         net.add_edge(source, target, title=edge_type, label=edge_type)
 
     # Configure physics
@@ -208,7 +208,7 @@ def render():
         # Layout and physics
         layout = st.selectbox("Layout Algorithm", ["spring", "hierarchical", "circular"])
         physics = st.checkbox("Enable Physics Simulation", value=True)
-        max_nodes = st.slider("Max Nodes to Display", 10, 500, 100, 10,
+        max_nodes = st.slider("Max Nodes to Display", 10, 3000, 2480, 100,
                              help="Limit number of nodes for performance")
 
     # Node and edge filters
@@ -230,7 +230,7 @@ def render():
             # Get edge types
             edge_types = set()
             for _, _, data in G.edges(data=True):
-                edge_types.add(data.get('type', 'unknown'))
+                edge_types.add(data.get('relation', data.get('type', 'unknown')))
 
             include_edge_types = st.multiselect(
                 "Include Edge Types",
@@ -300,14 +300,8 @@ def render():
         st.info(f"Showing random sample of {sample_size} nodes")
 
     else:  # Full Graph
-        # Limit to max_nodes
-        if G.number_of_nodes() > max_nodes:
-            import random
-            sampled_nodes = random.sample(list(G.nodes()), max_nodes)
-            G_sub = G.subgraph(sampled_nodes)
-            st.warning(f"Graph has {G.number_of_nodes()} nodes. Showing random sample of {max_nodes} for performance.")
-        else:
-            G_sub = G
+        G_sub = G
+        st.info(f"Showing full graph with {G.number_of_nodes()} nodes and {G.number_of_edges()} edges")
 
     # Apply filters
     nodes_to_keep = []
@@ -321,7 +315,7 @@ def render():
     # Filter edges
     edges_to_keep = []
     for u, v, data in G_sub.edges(data=True):
-        edge_type = data.get('type', 'unknown')
+        edge_type = data.get('relation', data.get('type', 'unknown'))
         if edge_type in include_edge_types:
             edges_to_keep.append((u, v))
 

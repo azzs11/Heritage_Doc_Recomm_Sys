@@ -261,7 +261,7 @@ def render():
             with chart_col:
                 # Score breakdown chart
                 breakdown_fig = create_score_breakdown_chart(rec, [0.4, 0.3, 0.3])
-                st.plotly_chart(breakdown_fig, use_container_width=True)
+                st.plotly_chart(breakdown_fig, use_container_width=True, key=f"breakdown_{i}")
 
             # KG Explanations
             if rec.get('kg_explanations'):

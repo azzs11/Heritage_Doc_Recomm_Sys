@@ -180,7 +180,7 @@ class RankNet(nn.Module):
         diff = labels_i - labels_j
 
         # Sigmoid cross-entropy loss
-        score_diff = scores_i - scores_j
+        score_diff = (scores_i - scores_j).squeeze(-1)
         target = (diff > 0).float()
 
         loss = nn.functional.binary_cross_entropy_with_logits(

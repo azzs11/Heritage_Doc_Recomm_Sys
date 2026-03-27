@@ -1,0 +1,80 @@
+{
+  "lambdamart": {
+    "simple_keyword": {
+      "simrank_weight": 0.4,
+      "horn_index_weight": 0.3,
+      "embedding_weight": 0.3,
+      "confidence": 0.5
+    },
+    "entity_focused": {
+      "simrank_weight": 0.4,
+      "horn_index_weight": 0.3,
+      "embedding_weight": 0.3,
+      "confidence": 0.5
+    },
+    "concept_focused": {
+      "simrank_weight": 0.11641957011229954,
+      "horn_index_weight": 0.6532259238177506,
+      "embedding_weight": 0.2303545060699499,
+      "confidence": 1.0
+    },
+    "complex_nlp": {
+      "simrank_weight": 0.4,
+      "horn_index_weight": 0.3,
+      "embedding_weight": 0.3,
+      "confidence": 0.5
+    }
+  },
+  "ranknet": {
+    "simple_keyword": {
+      "simrank_weight": 0.4,
+      "horn_index_weight": 0.3,
+      "embedding_weight": 0.3,
+      "confidence": 0.5
+    },
+    "entity_focused": {
+      "simrank_weight": 0.4,
+      "horn_index_weight": 0.3,
+      "embedding_weight": 0.3,
+      "confidence": 0.5
+    },
+    "concept_focused": {
+      "simrank_weight": 0.4466355294948949,
+      "horn_index_weight": 0.43661777129614565,
+      "embedding_weight": 0.11674669920895955,
+      "confidence": 1.0
+    },
+    "complex_nlp": {
+      "simrank_weight": 0.4,
+      "horn_index_weight": 0.3,
+      "embedding_weight": 0.3,
+      "confidence": 0.5
+    }
+  },
+  "listnet": {
+    "simple_keyword": {
+      "simrank_weight": 0.4,
+      "horn_index_weight": 0.3,
+      "embedding_weight": 0.3,
+      "confidence": 0.5
+    },
+    "entity_focused": {
+      "simrank_weight": 0.4,
+      "horn_index_weight": 0.3,
+      "embedding_weight": 0.3,
+      "confidence": 0.5
+    },
+    "concept_focused": {
+      "simrank_weight": 0.4466355294948949,
+      "horn_index_weight": 0.43661777129614565,
+      "embedding_weight": 0.11674669920895955,
+      "confidence": 1.0
+    },
+    "complex_nlp": {
+      "simrank_weight": 0.4,
+      "horn_index_weight": 0.3,
+      "embedding_weight": 0.3,
+      "confidence": 0.5
+    }
+  }
+}

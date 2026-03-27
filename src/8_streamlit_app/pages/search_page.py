@@ -143,7 +143,6 @@ def render():
     for i, example in enumerate(examples):
         if example_cols[i].button(example, key=f"ex_{i}", use_container_width=True):
             query_text = example.split(" ", 1)[1]  # Remove emoji
-            st.session_state.main_query = query_text
             st.rerun()
     
     st.markdown("---")
@@ -232,72 +231,53 @@ def render():
         # Display parsed attributes
         st.markdown("---")
         st.markdown("## 🔎 Query Understanding")
-        
+
         attr_col1, attr_col2, attr_col3, attr_col4 = st.columns(4)
-        
+
+        # Extract and convert sets to display strings
+        heritage_types = parsed_query.get('heritage_types', set())
+        heritage_display = ', '.join(sorted(heritage_types)) if heritage_types else 'None detected'
+
+        domains = parsed_query.get('domains', set())
+        domain_display = ', '.join(sorted(domains)) if domains else 'None detected'
+
+        time_period = parsed_query.get('time_period')
+        period_display = time_period.title() if time_period else 'Not specified'
+
+        region = parsed_query.get('region')
+        region_display = region.title() if region else 'Not specified'
+
         with attr_col1:
-            if parsed_query.get('heritage_types'):
-                st.markdown(f"""
-                <div class='result-card animated-card'>
-                    <strong>🏛️ Heritage Types</strong><br>
-                    {', '.join(parsed_query['heritage_types']) if parsed_query['heritage_types'] else 'None detected'}
-                </div>
-                """, unsafe_allow_html=True)
-            else:
-                st.markdown("""
-                <div class='result-card animated-card'>
-                    <strong>🏛️ Heritage Types</strong><br>
-                    None detected
-                </div>
-                """, unsafe_allow_html=True)
-        
+            st.markdown(f"""
+            <div class='result-card animated-card'>
+                <strong>🏛️ Heritage Types</strong><br>
+                {heritage_display}
+            </div>
+            """, unsafe_allow_html=True)
+
         with attr_col2:
-            if parsed_query.get('domains'):
-                st.markdown(f"""
-                <div class='result-card animated-card'>
-                    <strong>🎯 Domains</strong><br>
-                    {', '.join(parsed_query['domains']) if parsed_query['domains'] else 'None detected'}
-                </div>
-                """, unsafe_allow_html=True)
-            else:
-                st.markdown("""
-                <div class='result-card animated-card'>
-                    <strong>🎯 Domains</strong><br>
-                    None detected
-                </div>
-                """, unsafe_allow_html=True)
-        
+            st.markdown(f"""
+            <div class='result-card animated-card'>
+                <strong>🎯 Domains</strong><br>
+                {domain_display}
+            </div>
+            """, unsafe_allow_html=True)
+
         with attr_col3:
-            if parsed_query.get('time_period'):
-                st.markdown(f"""
-                <div class='result-card animated-card'>
-                    <strong>⏳ Period</strong><br>
-                    {parsed_query['time_period'].title()}
-                </div>
-                """, unsafe_allow_html=True)
-            else:
-                st.markdown("""
-                <div class='result-card animated-card'>
-                    <strong>⏳ Period</strong><br>
-                    Not specified
-                </div>
-                """, unsafe_allow_html=True)
-        
+            st.markdown(f"""
+            <div class='result-card animated-card'>
+                <strong>⏳ Period</strong><br>
+                {period_display}
+            </div>
+            """, unsafe_allow_html=True)
+
         with attr_col4:
-            if parsed_query.get('region'):
-                st.markdown(f"""
-                <div class='result-card animated-card'>
-                    <strong>📍 Region</strong><br>
-                    {parsed_query['region'].title()}
-                </div>
-                """, unsafe_allow_html=True)
-            else:
-                st.markdown("""
-                <div class='result-card animated-card'>
-                    <strong>📍 Region</strong><br>
-                    Not specified
-                </div>
-                """, unsafe_allow_html=True)
+            st.markdown(f"""
+            <div class='result-card animated-card'>
+                <strong>📍 Region</strong><br>
+                {region_display}
+            </div>
+            """, unsafe_allow_html=True)
         
         # ========== RECOMMENDATIONS ==========
         st.markdown("---")
@@ -310,8 +290,17 @@ def render():
                     recommender.simrank_weight = simrank_weight / total
                     recommender.horn_weight = horn_weight / total
                     recommender.embedding_weight = embedding_weight / total
-                
-                recommendations = recommender.recommend(parsed_query, top_k=top_k, explain=True)
+
+                # Pass filters to recommender (empty lists are treated as no filter)
+                recommendations = recommender.recommend(
+                    parsed_query,
+                    top_k=top_k,
+                    explain=True,
+                    filter_period=filter_period if filter_period else None,
+                    filter_region=filter_region if filter_region else None,
+                    filter_heritage=filter_heritage if filter_heritage else None,
+                    filter_domain=filter_domain if filter_domain else None
+                )
         except Exception as e:
             st.error(f"❌ Error getting recommendations: {str(e)}")
             return
@@ -330,11 +319,11 @@ def render():
         
         # Success message
         st.success(f"✅ Found {len(recommendations)} relevant documents!")
-        
+
         # ========== RESULTS PREVIEW ==========
         st.markdown("## 📚 Top Recommendations")
-        
-        for i, rec in enumerate(recommendations[:5], 1):  # Show top 5
+
+        for i, rec in enumerate(recommendations, 1):  # Show ALL results
             title = rec.get('title', 'Untitled Document')
             score = rec.get('hybrid_score', 0.0)
             
@@ -387,8 +376,8 @@ def render():
                         "SimRank",
                         "#2563eb"
                     )
-                    st.plotly_chart(fig1, use_container_width=True)
-                
+                    st.plotly_chart(fig1, use_container_width=True, key=f"simrank_{i}")
+
                 with gauge_cols[1]:
                     horn_score = component_scores.get('horn', 0.0)
                     fig2 = create_score_gauge(
@@ -396,8 +385,8 @@ def render():
                         "Horn's Index",
                         "#0d9488"
                     )
-                    st.plotly_chart(fig2, use_container_width=True)
-                
+                    st.plotly_chart(fig2, use_container_width=True, key=f"horn_{i}")
+
                 with gauge_cols[2]:
                     embedding_score = component_scores.get('embedding', 0.0)
                     fig3 = create_score_gauge(
@@ -405,7 +394,7 @@ def render():
                         "Embedding",
                         "#475569"
                     )
-                    st.plotly_chart(fig3, use_container_width=True)
+                    st.plotly_chart(fig3, use_container_width=True, key=f"embedding_{i}")
                 
                 # KG explanations
                 kg_explanations = rec.get('kg_explanations', [])

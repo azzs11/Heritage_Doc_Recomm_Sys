@@ -1,22 +1,22 @@
-# Python
+# ============================================================================
+# Heritage Document Recommender - Comprehensive .gitignore
+# Best Practices for Python ML/NLP Projects
+# ============================================================================
+
+# ============================================================================
+# PYTHON
+# ============================================================================
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+
+# Distribution / packaging
 .Python
-env/
-venv/
-ENV/
 build/
 develop-eggs/
-dist/# Knowledge Graph binaries (regenerate instead of committing)
-knowledge_graph/*.gpickle
-knowledge_graph/*.pkl
-
-# But keep statistics and visualizations
-!knowledge_graph/*.json
-!knowledge_graph/*.png
-!knowledge_graph/*.gml
+dist/
 downloads/
 eggs/
 .eggs/
@@ -26,51 +26,440 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
-# Data files (don't commit large datasets - but keep structure)
-data/raw/**/*.json
-data/cleaned/**/*.txt
-# Keep metadata and balanced data
-data/metadata/
-data/balanced/
+# PyInstaller
+*.manifest
+*.spec
 
-# Models (keep small model files, exclude large binaries)
-models/**/*.h5
-models/**/*.pth
-# Keep FAISS indices and configs
-# models/ranker/faiss/*.faiss
-# models/ranker/faiss/*.json
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
 
-# Knowledge Graph (keep some files)
-knowledge_graph/heritage_kg.gpickle
-knowledge_graph/heritage_kg.gml
-# Keep statistics and smaller files
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+test-results/
+tests/test_results/*
+!tests/test_results/.gitkeep
 
-# Jupyter Notebook
+# Translations
+*.mo
+*.pot
+
+# Scrapy stuff
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# ============================================================================
+# VIRTUAL ENVIRONMENTS
+# ============================================================================
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+.virtualenv/
+
+# ============================================================================
+# JUPYTER NOTEBOOK
+# ============================================================================
 .ipynb_checkpoints
+*/.ipynb_checkpoints/*
+*.ipynb
 
-# Environment variables
-.env
-config/api_keys.txt
+# Jupyter Notebook config
+.jupyter
 
-# IDE
+# ============================================================================
+# IDE & EDITORS
+# ============================================================================
+# VSCode
 .vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# PyCharm
 .idea/
+*.iml
+*.ipr
+*.iws
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
 *.swp
 *.swo
+*.swn
+*~
+.*.sw[a-z]
 
-# OS
+# Emacs
+*~
+\#*\#
+.\#*
+
+# Eclipse
+.project
+.pydevproject
+.settings/
+
+# ============================================================================
+# OPERATING SYSTEM
+# ============================================================================
+# macOS
 .DS_Store
-Thumbs.db
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
 
-# Logs (keep recent)
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+.directory
+.Trash-*
+.nfs*
+
+# ============================================================================
+# ENVIRONMENT & SECRETS
+# ============================================================================
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+.env.test
+*.env
+.envrc
+
+# API Keys & Secrets
+config/api_keys.txt
+config/secrets.json
+config/credentials.json
+**/secrets/
+**/credentials/
+*.key
+*.pem
+*.cert
+*.crt
+
+# ============================================================================
+# DATA FILES (Large or Generated)
+# ============================================================================
+# Raw data (keep structure, not content)
+data/raw/**/*.json
+data/raw/**/*.csv
+data/raw/**/*.txt
+data/raw/**/*.xml
+!data/raw/README.md
+!data/raw/.gitkeep
+
+# Processed data
+data/processed/**/*.csv
+data/processed/**/*.parquet
+!data/processed/README.md
+
+# Embeddings (regenerate instead of committing)
+data/embeddings/**/*.npy
+data/embeddings/**/*.npz
+data/embeddings/**/*.pkl
+data/embeddings/**/*.h5
+!data/embeddings/README.md
+!data/embeddings/*.json
+
+# Evaluation data (keep small files, exclude large ones)
+data/evaluation/**/*.csv
+data/evaluation/**/*.pkl
+!data/evaluation/*.json
+!data/evaluation/README.md
+
+# Keep metadata and config files
+!data/metadata/
+!data/balanced/
+
+# ============================================================================
+# KNOWLEDGE GRAPH
+# ============================================================================
+# Large binary knowledge graph files (regenerate from code)
+knowledge_graph/*.gpickle
+knowledge_graph/*.gml
+knowledge_graph/heritage_kg.gpickle
+knowledge_graph/heritage_kg.gml
+
+# SimRank matrices (large, regenerate)
+knowledge_graph/simrank/*.pkl
+knowledge_graph/simrank/*.npy
+
+# Keep config and statistics (small files)
+!knowledge_graph/*.json
+!knowledge_graph/README.md
+!knowledge_graph/simrank/*.json
+
+# Visualization files (large PNG files)
+knowledge_graph/*.png
+knowledge_graph/*.jpg
+knowledge_graph/*.svg
+
+# ============================================================================
+# MODELS & WEIGHTS
+# ============================================================================
+# Large model files (download or regenerate)
+models/**/*.h5
+models/**/*.hdf5
+models/**/*.pth
+models/**/*.pt
+models/**/*.ckpt
+models/**/*.safetensors
+models/**/*.bin
+models/**/*.pb
+
+# Pickle files (models)
+models/**/*.pkl
+models/**/*.pickle
+
+# FAISS indices (regenerate)
+models/**/*.faiss
+models/**/*.index
+
+# TensorFlow saved models
+models/**/saved_model/
+models/**/checkpoints/
+
+# Keep configs and small metadata
+!models/**/*.json
+!models/**/*.yaml
+!models/**/*.yml
+!models/**/README.md
+!models/**/.gitkeep
+
+# ============================================================================
+# LOGS & OUTPUTS
+# ============================================================================
+# Application logs
+*.log
+logs/
+*.log.*
 logs/**/*.log
 !logs/README.md
+!logs/.gitkeep
 
-.claude
+# Streamlit logs
+src/8_streamlit_app/*.log
+src/8_streamlit_app/nohup.out
+src/7_streamlit_app/*.log
+streamlit.log
+nohup.out
+
+# Run outputs
+output/
+outputs/
+*.out
+
+# ============================================================================
+# RESULTS & EXPERIMENTS
+# ============================================================================
+# Experiment results (keep small JSON, exclude large CSVs)
+results/**/*.csv
+results/**/*.pkl
+results/experiments/
+results/runs/
+results/checkpoints/
+
+# MLflow
+mlruns/
+mlflow/
+
+# TensorBoard
+runs/
+tensorboard/
+
+# Weights & Biases
+wandb/
+
+# Keep summary JSON files
+!results/*.json
+!results/README.md
+
+# ============================================================================
+# CACHE & TEMPORARY FILES
+# ============================================================================
+# Python cache
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+.pyre/
+
+# Ruff cache
+.ruff_cache/
+
+# General cache
+.cache/
+cache/
+*.cache
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+.#*
+
+# OS temp
+.tmp/
+tmp/
+
+# ============================================================================
+# DATABASES
+# ============================================================================
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# ============================================================================
+# COMPRESSED FILES (unless needed)
+# ============================================================================
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+*.bz2
+*.xz
+
+# ============================================================================
+# DOCUMENTATION BUILD
+# ============================================================================
+docs/_build/
+docs/.doctrees/
+site/
+_site/
+
+# ============================================================================
+# STREAMLIT SPECIFIC
+# ============================================================================
+.streamlit/secrets.toml
+.streamlit/config.toml
+
+# ============================================================================
+# CLAUDE CODE / TASKS
+# ============================================================================
+.claude/
+.claude/*
+!.claude/commands/
 tasks/
-"tests/test_results/*" 
-"!tests/test_results/.gitkeep" 
+tasks.md
+todo.md
+TODO.md
+
+# ============================================================================
+# GITHUB ACTIONS / CI
+# ============================================================================
+# Keep workflow files, ignore artifacts
+.github/workflows/*.log
+release-files/
+CHANGELOG.md
+
+# ============================================================================
+# PROJECT SPECIFIC
+# ============================================================================
+# Delivery documents (optional - keep in repo or not)
+*DELIVERY*.md
+*COMPLETE*.md
+
+# Contrast fixes doc (optional)
+CONTRAST_FIXES_APPLIED.md
+
+# Transformation guides (optional)
+MODERN_UI_TRANSFORMATION_GUIDE.md
+
+# ============================================================================
+# KEEP IMPORTANT FILES (Explicitly NOT ignored)
+# ============================================================================
+# Force-include important config files
+!.gitignore
+!requirements.txt
+!README.md
+!LICENSE
+!setup.py
+!pyproject.toml
+!.github/workflows/
+
+# Keep directory structures
+!**/.gitkeep
+!**/README.md
+
+# ============================================================================
+# NEXT.JS FRONTEND
+# ============================================================================
+frontend/.next/
+frontend/node_modules/
+frontend/.env*.local
+frontend/out/
+frontend/build/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.pnpm-debug.log*
+
+# ============================================================================
+# END OF .gitignore
+# ============================================================================
