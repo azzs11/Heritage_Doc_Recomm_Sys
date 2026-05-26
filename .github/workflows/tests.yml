@@ -39,7 +39,6 @@ jobs:
           else
             echo "No tests directory found, skipping tests"
           fi
-        continue-on-error: true
 
       # Step 5: Upload coverage reports
       - name: Upload coverage to Codecov
@@ -54,8 +53,7 @@ jobs:
       # Step 6: Check code can be imported
       - name: Check imports
         run: |
-          python -c "import sys; import os; print('Python version:', sys.version); print('Current directory:', os.getcwd()); print('✅ Code structure OK')"
-        continue-on-error: true
+          python -c "import sys; import os; print('Python version:', sys.version); print('Current directory:', os.getcwd()); print('Code structure OK')"
 
   lint:
     name: Code Quality Check

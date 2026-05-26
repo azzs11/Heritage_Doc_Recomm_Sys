@@ -39,13 +39,10 @@ gradio==4.0.0
 # Evaluation & Metrics
 scikit-metrics==0.1.0
 
-# RAG & Explanations (Optional)
-langchain==0.0.340
-openai==1.3.0
-
 # API Development (Optional)
 fastapi==0.104.1
 uvicorn==0.24.0
+slowapi==0.1.9
 
 # Utilities
 tqdm==4.66.1

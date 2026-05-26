@@ -362,6 +362,92 @@ def add_concept_similarity_edges(G):
     
     return edges_added
 
+def add_source_edges(G, documents):
+    """
+    Connect documents that share the same parent source URL (e.g. sub-sections
+    of the same Wikipedia article) with a 'same_source' relation.
+    Also adds a source provenance node for each unique URL so the graph
+    explicitly shows where each document came from.
+    """
+    print("\n[Phase 5b] Adding source / provenance edges...")
+
+    from urllib.parse import urlparse
+
+    edges_added = 0
+    source_nodes_added = 0
+
+    # Group by (normalised) URL
+    url_to_docs: dict = {}
+    for idx, doc in enumerate(documents):
+        url = doc.get('url', '').strip()
+        if not url:
+            continue
+        # Normalise: strip fragment, trailing slash
+        parsed = urlparse(url)
+        key = f"{parsed.netloc}{parsed.path}".rstrip('/')
+        url_to_docs.setdefault(key, []).append(idx)
+
+    for url_key, doc_indices in url_to_docs.items():
+        # Add a source provenance node
+        src_node_id = f"src_{url_key[:80].replace('/', '_').replace('.', '_')}"
+        if not G.has_node(src_node_id):
+            G.add_node(src_node_id, node_type='source', url=url_key)
+            source_nodes_added += 1
+
+        # Connect every doc to its source node
+        for idx in doc_indices:
+            G.add_edge(f"doc_{idx}", src_node_id, relation='from_source', weight=1.0)
+
+        # Also connect sibling docs directly with a lightweight edge
+        for i in range(len(doc_indices)):
+            for j in range(i + 1, len(doc_indices)):
+                d1, d2 = f"doc_{doc_indices[i]}", f"doc_{doc_indices[j]}"
+                if not G.has_edge(d1, d2):
+                    G.add_edge(d1, d2, relation='same_source', weight=0.7)
+                    edges_added += 1
+
+    print(f"  ✓ Added {source_nodes_added} source provenance nodes")
+    print(f"  ✓ Added {edges_added} same_source edges between sibling documents")
+    return edges_added
+
+
+def add_keyword_edges(G, documents):
+    """
+    Connect documents that share at least 2 top TF-IDF keywords.
+    This creates thematic bridges even across clusters.
+    """
+    print("\n[Phase 5c] Adding keyword co-occurrence edges...")
+
+    from collections import defaultdict
+
+    keyword_to_docs: dict = defaultdict(list)
+    for idx, doc in enumerate(documents):
+        for kw in doc.get('keywords_tfidf', [])[:8]:
+            if kw and len(kw) > 3:
+                keyword_to_docs[kw.lower()].append(idx)
+
+    # Count shared keywords between every doc pair
+    pair_shared: dict = defaultdict(int)
+    for kw, doc_indices in keyword_to_docs.items():
+        if len(doc_indices) < 2 or len(doc_indices) > 200:  # skip too-common keywords
+            continue
+        for i in range(len(doc_indices)):
+            for j in range(i + 1, len(doc_indices)):
+                pair_shared[(doc_indices[i], doc_indices[j])] += 1
+
+    edges_added = 0
+    for (i, j), shared_count in pair_shared.items():
+        if shared_count >= 2:
+            d1, d2 = f"doc_{i}", f"doc_{j}"
+            if not G.has_edge(d1, d2):
+                weight = min(shared_count / 5.0, 1.0)
+                G.add_edge(d1, d2, relation='shares_keywords', weight=weight, shared_keywords=shared_count)
+                edges_added += 1
+
+    print(f"  ✓ Added {edges_added} keyword co-occurrence edges (≥2 shared keywords)")
+    return edges_added
+
+
 def add_cluster_edges(G, documents, embeddings):
     """
     Add edges connecting documents in the same cluster - IMPROVED
@@ -580,11 +666,17 @@ def main():
     
     # Add similarity edges
     add_similarity_edges(G, documents, embeddings, threshold=CONFIG['similarity_threshold'])
-    
-    # Add concept similarity edges (Lesk) - IMPROVED
+
+    # Add concept similarity edges (Lesk)
     concept_edges = add_concept_similarity_edges(G)
-    
-    # Add cluster edges - IMPROVED (top-K only)
+
+    # Add source provenance edges (connects sibling sub-sections)
+    add_source_edges(G, documents)
+
+    # Add keyword co-occurrence edges (thematic bridges)
+    add_keyword_edges(G, documents)
+
+    # Add cluster edges (top-K only)
     add_cluster_edges(G, documents, embeddings)
     
     # Compute statistics

@@ -1,35 +1,38 @@
 {
-  "total_nodes": 9217,
-  "total_edges": 34565,
+  "total_nodes": 3006,
+  "total_edges": 8058,
   "node_types": {
-    "document": 1781,
-    "location": 2355,
-    "organization": 2587,
-    "person": 2473,
+    "document": 303,
+    "location": 894,
+    "person": 786,
+    "organization": 709,
     "heritage_type": 6,
     "domain": 6,
     "time_period": 3,
-    "region": 6
+    "region": 5,
+    "source": 294
   },
   "edge_types": {
-    "mentions_location": 7036,
-    "mentions_org": 4789,
-    "has_type": 3265,
-    "belongs_to_domain": 4648,
-    "from_period": 1311,
-    "located_in_region": 918,
-    "similar_to": 5327,
-    "same_cluster": 2955,
-    "mentions_person": 4287,
+    "mentions_location": 1468,
+    "mentions_person": 880,
+    "mentions_org": 899,
+    "has_type": 604,
+    "belongs_to_domain": 902,
+    "from_period": 295,
+    "located_in_region": 197,
+    "from_source": 303,
+    "shares_keywords": 2012,
+    "same_cluster": 266,
+    "similar_to": 207,
     "semantically_related": 12,
     "temporally_related": 3,
-    "geographically_related": 14
+    "geographically_related": 10
   },
-  "density": 0.0008138315145323255,
-  "average_degree": 7.500271237929912,
-  "is_connected": false,
-  "number_of_components": 2,
-  "creation_date": "2026-03-28T03:20:05.059960",
+  "density": 0.0017841189501197274,
+  "average_degree": 5.36127744510978,
+  "is_connected": true,
+  "number_of_components": 1,
+  "creation_date": "2026-04-07T16:36:55.137658",
   "config": {
     "similarity_threshold": 0.6,
     "concept_similarity_threshold": 0.5,
@@ -39,44 +42,44 @@
   },
   "top_central_documents": [
     {
-      "title": "Policy-making institutions",
-      "centrality": 0.008029513888888888
+      "title": "Mahabodhi Temple",
+      "centrality": 0.02495840266222962
     },
     {
-      "title": "Cultural heritage",
-      "centrality": 0.007921006944444444
+      "title": "Buddhist architecture",
+      "centrality": 0.024292845257903494
     },
     {
-      "title": "Cultural heritage",
-      "centrality": 0.007921006944444444
+      "title": "Jain temple",
+      "centrality": 0.023627287853577372
     },
     {
-      "title": "Monument",
-      "centrality": 0.007486979166666666
+      "title": "Kailasa Temple, Ellora",
+      "centrality": 0.023627287853577372
     },
     {
-      "title": "Monument",
-      "centrality": 0.007161458333333333
+      "title": "Hindu temple architecture",
+      "centrality": 0.022961730449251247
     },
     {
-      "title": "List of heritage registers",
-      "centrality": 0.007161458333333333
+      "title": "Ellora Caves",
+      "centrality": 0.022296173044925125
     },
     {
-      "title": "World Heritage Site",
-      "centrality": 0.007052951388888888
+      "title": "Prambanan",
+      "centrality": 0.021963394342762062
     },
     {
-      "title": "Conservation and restoration of cultural property",
-      "centrality": 0.006618923611111111
+      "title": "Bagan",
+      "centrality": 0.021630615640599003
     },
     {
-      "title": "Objectives",
-      "centrality": 0.006510416666666666
+      "title": "Ramanathaswamy Temple",
+      "centrality": 0.021630615640599003
     },
     {
-      "title": "Conservation and restoration of cultural property",
-      "centrality": 0.006510416666666666
+      "title": "Aihole",
+      "centrality": 0.021630615640599003
     }
   ]
 }

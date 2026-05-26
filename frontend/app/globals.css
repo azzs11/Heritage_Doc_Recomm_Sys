@@ -2,33 +2,221 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Design tokens ────────────────────────────────────────────── */
 :root {
-  --parchment: #f5ebe0;
-  --brown: #8b5e3c;
-  --brown-dark: #4a2c17;
-  --brown-medium: #6b4226;
-  --gold: #c8a84b;
+  /* Light mode — parchment & warm earth */
+  --bg-base:       #f9f3ea;
+  --bg-card:       #ffffff;
+  --bg-card-hover: #fdf8f0;
+  --bg-muted:      #f5ebe0;
+  --text-primary:  #4a2c17;
+  --text-muted:    #8b5e3c;
+  --text-subtle:   #c49a6c;
+  --border:        #ead5c0;
+  --border-subtle: #f0dfc8;
+  --accent-gold:   #c8a84b;
+  --accent-teal:   #2a7c6f;
+  --accent-rust:   #b84c2a;
+  --nav-bg:        rgba(42,22,8,0.96);
+  --stat-bg:       linear-gradient(90deg,#4a2c17 0%,#6b4226 50%,#4a2c17 100%);
+
+  /* Parchment tokens */
+  --parchment:     #f5ebe0;
+  --parchment-200: #ead5c0;
+  --parchment-300: #d9b896;
+  --heritage-dark: #4a2c17;
+  --heritage-gold: #c8a84b;
 }
 
+.dark {
+  /* Dark mode — aged manuscript by candlelight */
+  --bg-base:       #0d0906;
+  --bg-card:       #1a1108;
+  --bg-card-hover: #231810;
+  --bg-muted:      #140e07;
+  --text-primary:  #f5ebe0;
+  --text-muted:    #c49a6c;
+  --text-subtle:   #8b5e3c;
+  --border:        #2e1e0e;
+  --border-subtle: #241608;
+  --accent-gold:   #d4b86a;
+  --accent-teal:   #3d9e8f;
+  --accent-rust:   #cc5e38;
+  --nav-bg:        rgba(8,5,2,0.97);
+  --stat-bg:       linear-gradient(90deg,#1a0e05 0%,#2a1a08 50%,#1a0e05 100%);
+}
+
+/* ── Base ─────────────────────────────────────────────────────── */
 body {
-  background-color: var(--parchment);
-  color: var(--brown-dark);
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+html { scroll-behavior: smooth; }
+
+/* ── Component layer ──────────────────────────────────────────── */
 @layer components {
   .heritage-card {
-    @apply bg-parchment-100 border border-parchment-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200;
+    @apply rounded-2xl shadow-sm transition-all duration-300;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+  }
+  .heritage-card:hover {
+    box-shadow: 0 8px 32px rgba(74,44,23,0.12);
+    background-color: var(--bg-card-hover);
+  }
+  .dark .heritage-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
   }
 
   .btn-primary {
-    @apply bg-heritage-brown hover:bg-heritage-medium text-white font-semibold px-5 py-2 rounded transition-colors duration-200;
+    @apply font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 shadow hover:shadow-md hover:-translate-y-px;
+    background-color: var(--heritage-dark);
+    color: var(--parchment);
   }
+  .btn-primary:hover { background-color: #6b4226; }
 
   .btn-secondary {
-    @apply border border-heritage-brown text-heritage-brown hover:bg-parchment-200 px-5 py-2 rounded transition-colors duration-200;
+    @apply px-5 py-2.5 rounded-xl transition-all duration-200;
+    border: 1px solid var(--border);
+    color: var(--text-primary);
   }
+  .btn-secondary:hover { background-color: var(--bg-muted); }
 
   .section-title {
-    @apply font-serif text-xl font-bold text-heritage-dark border-b border-parchment-200 pb-2 mb-4;
+    @apply font-serif text-2xl font-bold pb-2 mb-6;
+    color: var(--text-primary);
   }
+
+  .tag-pill {
+    @apply text-[10px] px-2 py-0.5 rounded-full border font-semibold capitalize tracking-wide;
+  }
+}
+
+/* ── Hero shimmer ─────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.hero-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(200,168,75,0.08) 50%, transparent 60%);
+  background-size: 200% 100%;
+  animation: shimmer 6s linear infinite;
+  pointer-events: none;
+}
+
+/* ── Fade-up entry ────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.5s ease both; }
+.fade-up-delay-1 { animation-delay: 0.05s; }
+.fade-up-delay-2 { animation-delay: 0.10s; }
+.fade-up-delay-3 { animation-delay: 0.15s; }
+
+/* ── Card glow ring ───────────────────────────────────────────── */
+.card-glow:hover {
+  box-shadow: 0 0 0 2px rgba(200,168,75,0.35), 0 8px 24px rgba(74,44,23,0.12);
+}
+.dark .card-glow:hover {
+  box-shadow: 0 0 0 2px rgba(212,184,106,0.3), 0 8px 24px rgba(0,0,0,0.5);
+}
+
+/* ── Gradient border on card hover ───────────────────────────── */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--angle, 0deg), #c8a84b, #4a2c17, #2a7c6f, #c8a84b);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.gradient-border:hover::before {
+  opacity: 1;
+  animation: border-rotate 3s linear infinite;
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes border-rotate {
+  to { --angle: 360deg; }
+}
+
+/* ── Collection card overlay ──────────────────────────────────── */
+.collection-card-overlay {
+  background: linear-gradient(to top, rgba(74,44,23,0.92) 0%, rgba(74,44,23,0.40) 60%, transparent 100%);
+}
+
+/* ── Stat strip ───────────────────────────────────────────────── */
+.stat-strip { background: var(--stat-bg); }
+
+/* ── Marquee ──────────────────────────────────────────────────── */
+@keyframes marquee {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 36s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ── Topic pill hover (CSS-variable-aware) ───────────────────── */
+.topic-pill {
+  background-color: var(--bg-card);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+.topic-pill:hover {
+  background-color: var(--heritage-dark);
+  border-color: var(--heritage-dark);
+  color: var(--parchment);
+}
+.dark .topic-pill:hover {
+  background-color: var(--accent-gold);
+  border-color: var(--accent-gold);
+  color: var(--heritage-dark);
+}
+
+/* ── Noise texture overlay ────────────────────────────────────── */
+.noise-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-muted); }
+::-webkit-scrollbar-thumb { background: var(--accent-gold); border-radius: 3px; }
+
+/* ── Theme transition ─────────────────────────────────────────── */
+*, *::before, *::after {
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+/* Exclude transitions that shouldn't animate */
+button, a, [data-no-transition] {
+  transition: none;
+}
+button, a {
+  transition: color 0.15s ease, background-color 0.15s ease,
+              box-shadow 0.15s ease, transform 0.15s ease,
+              opacity 0.15s ease, border-color 0.15s ease;
 }

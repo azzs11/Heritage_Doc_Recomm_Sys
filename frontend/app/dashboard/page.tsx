@@ -1,16 +1,26 @@
 import { Suspense } from "react";
 import Loader from "@/components/ui/Loader";
 import ErrorState from "@/components/ui/ErrorState";
-import { getSystemStats, getMetrics, checkHealth } from "@/lib/api";
+import { getSystemStats, getMetrics, checkHealth, getKGStats } from "@/lib/api";
+
+// Colour cycle for stacked bars
+const BAR_COLORS = [
+  "bg-heritage-teal",
+  "bg-heritage-brown",
+  "bg-heritage-gold",
+  "bg-heritage-rust",
+  "bg-heritage-light",
+];
 
 async function DashboardContent() {
-  let stats, metrics, health;
+  let stats, metrics, health, kgStats;
 
   try {
-    [stats, metrics, health] = await Promise.all([
+    [stats, metrics, health, kgStats] = await Promise.all([
       getSystemStats(),
       getMetrics().catch(() => null),
       checkHealth(),
+      getKGStats().catch(() => null),
     ]);
   } catch {
     return (
@@ -78,17 +88,88 @@ async function DashboardContent() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Node type breakdown */}
+        {/* KG Structure — enriched card */}
         <div className="heritage-card p-5">
-          <h3 className="font-serif font-semibold text-heritage-dark mb-4">Graph Node Types</h3>
-          <dl className="space-y-2">
-            {Object.entries(stats.node_types).map(([type, count]) => (
-              <div key={type} className="flex justify-between items-center text-sm">
-                <dt className="capitalize text-heritage-brown">{type}</dt>
-                <dd className="font-semibold text-heritage-dark">{(count as number).toLocaleString()}</dd>
+          <h3 className="font-serif font-semibold text-heritage-dark mb-1">Knowledge Graph Structure</h3>
+          <p className="text-[11px] text-gray-400 mb-4">Heterogeneous graph powering SimRank similarity</p>
+
+          {/* Density + Avg Degree chips */}
+          {kgStats && (
+            <div className="flex gap-3 mb-4">
+              <div className="flex-1 bg-parchment-50 border border-parchment-200 rounded-lg p-2.5 text-center">
+                <p className="text-[10px] text-heritage-brown font-semibold uppercase tracking-wide">Density</p>
+                <p className="font-bold text-heritage-dark font-serif text-base">{kgStats.density.toFixed(4)}</p>
               </div>
-            ))}
-          </dl>
+              <div className="flex-1 bg-parchment-50 border border-parchment-200 rounded-lg p-2.5 text-center">
+                <p className="text-[10px] text-heritage-brown font-semibold uppercase tracking-wide">Avg Degree</p>
+                <p className="font-bold text-heritage-dark font-serif text-base">{kgStats.average_degree.toFixed(1)}</p>
+              </div>
+            </div>
+          )}
+
+          {/* Node type stacked bar */}
+          <p className="text-[10px] font-bold text-heritage-brown uppercase tracking-wide mb-1.5">Node Types</p>
+          {(() => {
+            const entries = Object.entries(stats.node_types) as [string, number][];
+            const total = entries.reduce((s, [, c]) => s + c, 0) || 1;
+            return (
+              <>
+                <div className="flex h-3 rounded-full overflow-hidden gap-px mb-2">
+                  {entries.map(([type, count], i) => (
+                    <div
+                      key={type}
+                      className={`${BAR_COLORS[i % BAR_COLORS.length]} first:rounded-l-full last:rounded-r-full`}
+                      style={{ width: `${(count / total * 100).toFixed(1)}%` }}
+                      title={`${type}: ${count.toLocaleString()}`}
+                    />
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-x-3 gap-y-1">
+                  {entries.map(([type, count], i) => (
+                    <span key={type} className="flex items-center gap-1 text-[10px] text-heritage-brown">
+                      <span className={`inline-block w-2 h-2 rounded-full ${BAR_COLORS[i % BAR_COLORS.length]}`} />
+                      <span className="capitalize">{type}</span>
+                      <span className="text-gray-400">({count.toLocaleString()})</span>
+                    </span>
+                  ))}
+                </div>
+              </>
+            );
+          })()}
+
+          {/* Edge type stacked bar */}
+          {kgStats && Object.keys(kgStats.edge_types).length > 0 && (
+            <div className="mt-4">
+              <p className="text-[10px] font-bold text-heritage-brown uppercase tracking-wide mb-1.5">Edge / Relation Types</p>
+              {(() => {
+                const entries = Object.entries(kgStats.edge_types) as [string, number][];
+                const total = entries.reduce((s, [, c]) => s + c, 0) || 1;
+                return (
+                  <>
+                    <div className="flex h-3 rounded-full overflow-hidden gap-px mb-2">
+                      {entries.map(([rel, count], i) => (
+                        <div
+                          key={rel}
+                          className={`${BAR_COLORS[i % BAR_COLORS.length]} first:rounded-l-full last:rounded-r-full`}
+                          style={{ width: `${(count / total * 100).toFixed(1)}%` }}
+                          title={`${rel}: ${count.toLocaleString()}`}
+                        />
+                      ))}
+                    </div>
+                    <div className="flex flex-wrap gap-x-3 gap-y-1">
+                      {entries.map(([rel, count], i) => (
+                        <span key={rel} className="flex items-center gap-1 text-[10px] text-heritage-brown">
+                          <span className={`inline-block w-2 h-2 rounded-full ${BAR_COLORS[i % BAR_COLORS.length]}`} />
+                          <span className="capitalize">{rel.replace(/_/g, " ")}</span>
+                          <span className="text-gray-400">({count.toLocaleString()})</span>
+                        </span>
+                      ))}
+                    </div>
+                  </>
+                );
+              })()}
+            </div>
+          )}
         </div>
 
         {/* Accuracy metrics */}

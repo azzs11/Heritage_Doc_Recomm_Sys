@@ -1,34 +1,34 @@
 {
   "0": {
-    "label": "Cultural Monument, Architecture",
+    "label": "Religious Monument, Site",
     "heritage_types": [
       "monument",
-      "architecture"
+      "site"
     ],
-    "dominant_domain": "cultural",
+    "dominant_domain": "religious",
     "dominant_period": "ancient",
-    "dominant_region": "unknown",
-    "size": 178,
+    "dominant_region": "north",
+    "size": 18,
     "sample_titles": [
-      "World Heritage Site",
-      "Objectives",
-      "Selection criteria"
+      "Bagan",
+      "Ayutthaya Historical Park",
+      "Chittor Fort"
     ]
   },
   "1": {
-    "label": "Cultural Art, Site",
+    "label": "Cultural Monument, Art",
     "heritage_types": [
-      "art",
-      "site"
+      "monument",
+      "art"
     ],
     "dominant_domain": "cultural",
     "dominant_period": "ancient",
     "dominant_region": "unknown",
-    "size": 108,
+    "size": 21,
     "sample_titles": [
-      "Government",
-      "Demographics",
-      "Transport"
+      "Palace of Versailles",
+      "Tiber",
+      "Palace of the Popes"
     ]
   },
   "2": {
@@ -40,91 +40,91 @@
     "dominant_domain": "cultural",
     "dominant_period": "ancient",
     "dominant_region": "north",
-    "size": 197,
+    "size": 48,
     "sample_titles": [
-      "Archaeological Survey of India",
-      "History",
-      "The Golden Road: How Ancient India Transformed the World"
+      "Jain temple",
+      "Babylon",
+      "Hindu temple architecture"
     ]
   },
   "3": {
-    "label": "Cultural Architecture, Site",
+    "label": "Cultural Art, Site",
     "heritage_types": [
-      "architecture",
+      "art",
       "site"
     ],
     "dominant_domain": "cultural",
     "dominant_period": "ancient",
     "dominant_region": "unknown",
-    "size": 144,
+    "size": 17,
     "sample_titles": [
-      "Nomination process",
-      "Endangerment",
-      "Criticism"
+      "Euphrates",
+      "Easter Island",
+      "Nile"
     ]
   },
   "4": {
-    "label": "Cultural Art, Site",
+    "label": "Cultural Monument, Site",
     "heritage_types": [
-      "art",
+      "monument",
       "site"
     ],
     "dominant_domain": "cultural",
     "dominant_period": "ancient",
     "dominant_region": "north",
-    "size": 188,
+    "size": 49,
     "sample_titles": [
-      "Bronze Age (c. 3300 – 1800 BCE)",
-      "Early medieval period (c. 650 – 1200)",
-      "Late medieval period (c. 1200 – 1526)"
+      "Colosseum",
+      "Angkor Thom",
+      "Hatra"
     ]
   },
   "5": {
-    "label": "Cultural Art, Site",
+    "label": "Military Art, Site",
     "heritage_types": [
       "art",
       "site"
     ],
-    "dominant_domain": "cultural",
-    "dominant_period": "unknown",
-    "dominant_region": "unknown",
-    "size": 104,
+    "dominant_domain": "military",
+    "dominant_period": "ancient",
+    "dominant_region": "west",
+    "size": 6,
     "sample_titles": [
-      "Climate",
-      "Economy",
-      "Education"
+      "Julius Caesar",
+      "Auschwitz concentration camp",
+      "Charlemagne"
     ]
   },
   "6": {
-    "label": "Cultural Monument, Architecture",
+    "label": "Cultural Monument, Site",
     "heritage_types": [
       "monument",
-      "architecture"
+      "site"
     ],
     "dominant_domain": "cultural",
     "dominant_period": "ancient",
     "dominant_region": "unknown",
-    "size": 210,
+    "size": 41,
     "sample_titles": [
-      "History",
-      "Ancient monument",
-      "Historical significance and cultural heritage"
+      "Tsodilo",
+      "Nanda Devi and Valley of Flowers National Parks",
+      "Isfahan"
     ]
   },
   "7": {
-    "label": "Cultural Monument, Architecture",
+    "label": "Cultural Site, Monument",
     "heritage_types": [
-      "monument",
-      "architecture"
+      "site",
+      "monument"
     ],
     "dominant_domain": "cultural",
     "dominant_period": "ancient",
     "dominant_region": "unknown",
-    "size": 131,
+    "size": 16,
     "sample_titles": [
-      "Oxfordshire Architectural and Historical Society",
-      "Changing pedagogies",
-      "Bucharest"
+      "Pont du Gard",
+      "West Lake",
+      "Neuschwanstein Castle"
     ]
   },
   "8": {
@@ -135,47 +135,31 @@
     ],
     "dominant_domain": "cultural",
     "dominant_period": "ancient",
-    "dominant_region": "unknown",
-    "size": 109,
+    "dominant_region": "north",
+    "size": 11,
     "sample_titles": [
-      "Extensions and other modifications",
-      "Postmodern architecture",
-      "Notable postmodern buildings and architects"
+      "Augustus",
+      "Leonardo da Vinci",
+      "Statue of Liberty"
     ]
   },
   "9": {
-    "label": "Religious Monument, Architecture",
+    "label": "Religious Monument, Site",
     "heritage_types": [
       "monument",
-      "architecture"
+      "site"
     ],
     "dominant_domain": "religious",
     "dominant_period": "ancient",
     "dominant_region": "north",
-    "size": 145,
+    "size": 31,
     "sample_titles": [
-      "List of World Heritage Sites in India",
-      "List of World Heritage Sites in India",
-      "Monuments of National Importance"
+      "Pattadakal",
+      "Sigiriya",
+      "Bidar Fort"
     ]
   },
   "10": {
-    "label": "Cultural Art, Site",
-    "heritage_types": [
-      "art",
-      "site"
-    ],
-    "dominant_domain": "cultural",
-    "dominant_period": "unknown",
-    "dominant_region": "north",
-    "size": 140,
-    "sample_titles": [
-      "Late modern period and contemporary history (1857–1947)",
-      "Independence and partition (1947–present)",
-      "National symbols"
-    ]
-  },
-  "11": {
     "label": "Cultural Monument, Site",
     "heritage_types": [
       "monument",
@@ -183,12 +167,28 @@
     ],
     "dominant_domain": "cultural",
     "dominant_period": "ancient",
-    "dominant_region": "unknown",
-    "size": 127,
+    "dominant_region": "india",
+    "size": 20,
     "sample_titles": [
-      "Scientific preservation",
-      "Publications",
-      "Korean architecture"
+      "Independence Hall",
+      "Palace of Westminster",
+      "Cologne Cathedral"
+    ]
+  },
+  "11": {
+    "label": "Cultural Site, Monument",
+    "heritage_types": [
+      "site",
+      "monument"
+    ],
+    "dominant_domain": "cultural",
+    "dominant_period": "ancient",
+    "dominant_region": "unknown",
+    "size": 25,
+    "sample_titles": [
+      "Ephesus",
+      "Byzantine architecture",
+      "Old Town of Lijiang"
     ]
   }
 }
