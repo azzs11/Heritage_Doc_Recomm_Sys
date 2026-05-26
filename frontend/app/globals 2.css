@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --parchment: #f5ebe0;
+  --brown: #8b5e3c;
+  --brown-dark: #4a2c17;
+  --brown-medium: #6b4226;
+  --gold: #c8a84b;
+  --teal: #2a7c6f;
+  --rust: #b84c2a;
+}
+
+body {
+  background-color: #f9f3ea;
+  color: var(--brown-dark);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer components {
+  .heritage-card {
+    @apply bg-white border border-parchment-200 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply bg-heritage-brown hover:bg-heritage-medium text-white font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 shadow hover:shadow-md hover:-translate-y-px;
+  }
+
+  .btn-secondary {
+    @apply border border-heritage-brown text-heritage-brown hover:bg-parchment-100 px-5 py-2.5 rounded-xl transition-all duration-200;
+  }
+
+  .section-title {
+    @apply font-serif text-2xl font-bold text-heritage-dark pb-2 mb-6;
+  }
+
+  .tag-pill {
+    @apply text-[10px] px-2 py-0.5 rounded-full border font-semibold capitalize tracking-wide;
+  }
+}
+
+/* ── Animated hero background shimmer ── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.hero-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(200,168,75,0.08) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 6s linear infinite;
+  pointer-events: none;
+}
+
+/* ── Fade-up entry for cards ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  animation: fadeUp 0.5s ease both;
+}
+
+.fade-up-delay-1 { animation-delay: 0.05s; }
+.fade-up-delay-2 { animation-delay: 0.10s; }
+.fade-up-delay-3 { animation-delay: 0.15s; }
+
+/* ── Glow ring on card hover ── */
+.card-glow:hover {
+  box-shadow: 0 0 0 2px rgba(200,168,75,0.35), 0 8px 24px rgba(74,44,23,0.12);
+}
+
+/* ── Collection card parallax overlay ── */
+.collection-card-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(74,44,23,0.92) 0%,
+    rgba(74,44,23,0.40) 60%,
+    transparent 100%
+  );
+}
+
+/* ── Stat counter strip ── */
+.stat-strip {
+  background: linear-gradient(90deg, #4a2c17 0%, #6b4226 50%, #4a2c17 100%);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: #f5ebe0; }
+::-webkit-scrollbar-thumb { background: #c8a84b; border-radius: 3px; }

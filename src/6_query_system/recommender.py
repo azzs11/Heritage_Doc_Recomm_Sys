@@ -151,6 +151,16 @@ class HeritageRecommender:
         self.doc_id_to_idx = {doc_id: idx for idx, doc_id in enumerate(self.doc_nodes)}
         self.idx_to_doc_id = {idx: doc_id for doc_id, idx in self.doc_id_to_idx.items()}
 
+        # Precompute per-document entity sets for fast Horn score calculation
+        _entity_types = {'location', 'person', 'organization', 'heritage_type', 'domain', 'time_period', 'region'}
+        self._doc_entity_sets: dict = {
+            doc_id: {
+                nb for nb in self.G.neighbors(doc_id)
+                if self.G.nodes[nb].get('node_type') in _entity_types
+            }
+            for doc_id in self.doc_nodes
+        }
+
         print(f"Recommender initialized with {len(self.doc_nodes)} documents!")
         print(f"Weights: SimRank={simrank_weight}, Horn={horn_weight}, Embedding={embedding_weight}")
 
@@ -173,47 +183,37 @@ class HeritageRecommender:
         """
         Compute Horn's Index score based on entity importance.
 
-        Args:
-            doc_id: Document node ID
-            parsed_query: Parsed query with extracted entities
+        Two-pass scoring:
+        1. KG-based: overlap between query entities (as KG IDs) and the document's
+           KG neighbours — weighted by precomputed Horn weights.
+        2. Fallback text-entity matching: if the KG pass returns 0 (entity not in
+           graph), check whether query location/person/org names appear literally
+           in the document node's metadata.  This handles queries like "Taj Mahal"
+           whose entity isn't a first-class KG node.
 
         Returns:
             Horn's Index score [0, 1]
         """
         if not self.horn_weights:
-            # Log warning only once to avoid spam
             if not self._horn_fallback_logged:
                 logger.warning(f"Horn weights not available. Using fallback value: {self.horn_fallback_value}")
                 self._horn_fallback_logged = True
             return self.horn_fallback_value
 
-        # Get document's connected entities
-        doc_entities = set()
-        for neighbor in self.G.neighbors(doc_id):
-            neighbor_type = self.G.nodes[neighbor].get('node_type')
-            if neighbor_type in ['location', 'person', 'organization', 'heritage_type', 'domain', 'time_period', 'region']:
-                doc_entities.add(neighbor)
+        # Use precomputed entity sets (avoids per-call graph traversal)
+        doc_entities = self._doc_entity_sets.get(doc_id, set())
 
         # Convert query entities to KG entity IDs (with prefixes)
         query_entities = set()
 
-        # Heritage types: "temple" -> "type_temple"
         for heritage_type in parsed_query.get('heritage_types', []):
             query_entities.add(f"type_{heritage_type}")
-
-        # Domains: "religious" -> "domain_religious"
         for domain in parsed_query.get('domains', []):
             query_entities.add(f"domain_{domain}")
-
-        # Time period: "ancient" -> "period_ancient"
         if parsed_query.get('time_period'):
             query_entities.add(f"period_{parsed_query['time_period']}")
-
-        # Region: "north" -> "region_north"
         if parsed_query.get('region'):
             query_entities.add(f"region_{parsed_query['region']}")
-
-        # Locations, persons, orgs: "India" -> "loc_india" (lowercase)
         for location in parsed_query.get('locations', []):
             query_entities.add(f"loc_{location.lower().replace(' ', '_')}")
         for person in parsed_query.get('persons', []):
@@ -221,19 +221,56 @@ class HeritageRecommender:
         for org in parsed_query.get('organizations', []):
             query_entities.add(f"org_{org.lower().replace(' ', '_')}")
 
-        if not query_entities or not doc_entities:
+        # ── Pass 1: KG graph overlap ────────────────────────────────────
+        kg_score = 0.0
+        if query_entities and doc_entities:
+            matching_entities = doc_entities.intersection(query_entities)
+            if matching_entities:
+                total_weight = sum(self.horn_weights.get(entity, 0.5) for entity in matching_entities)
+                kg_score = total_weight / len(matching_entities)
+
+        if kg_score > 0.0:
+            return kg_score
+
+        # ── Pass 2: text-entity fallback ────────────────────────────────
+        # For entities not represented in the KG (e.g. "Taj Mahal"), check
+        # whether any query entity name appears in the document node's title
+        # or its KG-neighbour labels.
+        query_names = (
+            [n.lower() for n in parsed_query.get('locations', [])] +
+            [n.lower() for n in parsed_query.get('persons', [])] +
+            [n.lower() for n in parsed_query.get('organizations', [])]
+        )
+        if not query_names:
             return 0.0
 
-        # Compute weighted overlap
-        matching_entities = doc_entities.intersection(query_entities)
-        if not matching_entities:
+        # Build searchable text from the document's KG neighbourhood
+        doc_data = self.G.nodes.get(doc_id, {})
+        doc_title = (doc_data.get('title') or '').lower()
+
+        # Collect labels of all neighbour nodes (entities in the KG connected to this doc)
+        neighbour_labels = set()
+        for nb in self.G.neighbors(doc_id):
+            nb_data = self.G.nodes.get(nb, {})
+            label = (nb_data.get('name') or nb_data.get('title') or nb).lower()
+            neighbour_labels.add(label)
+
+        matches = 0
+        for name in query_names:
+            # Check title
+            if name in doc_title:
+                matches += 1
+                continue
+            # Check neighbour labels (partial match — "taj mahal" in "the taj mahal")
+            for label in neighbour_labels:
+                if name in label or label in name:
+                    matches += 1
+                    break
+
+        if matches == 0:
             return 0.0
 
-        # Sum of Horn weights for matching entities
-        total_weight = sum(self.horn_weights.get(entity, 0.5) for entity in matching_entities)
-        max_possible_weight = len(matching_entities)  # Max weight if all were 1.0
-
-        return total_weight / max_possible_weight if max_possible_weight > 0 else 0.0
+        return min(1.0, 0.4 * (matches / len(query_names)))
 
     def compute_embedding_similarity(self, query_embedding: np.ndarray, doc_idx: int) -> float:
         """
@@ -270,18 +307,8 @@ class HeritageRecommender:
             List of paths (each path is a list of node IDs)
         """
         try:
-            # Find all simple paths up to length 4
-            paths = list(nx.all_simple_paths(
-                self.G,
-                source=source_doc_id,
-                target=target_doc_id,
-                cutoff=4
-            ))
-
-            # Sort by length and return top paths
-            paths = sorted(paths, key=len)[:max_paths]
-            return paths
-
+            path = nx.shortest_path(self.G, source=source_doc_id, target=target_doc_id)
+            return [path]
         except (nx.NetworkXNoPath, nx.NodeNotFound):
             return []
 
@@ -384,34 +411,42 @@ class HeritageRecommender:
 
         query_doc_idx = self._faiss_to_docnode_idx.get(faiss_idx, 0)
 
-        # Compute hybrid scores for all documents
-        for doc_idx, doc_id in enumerate(self.doc_nodes):
-            # Embedding similarity (always available)
-            emb_score = self.compute_embedding_similarity(query_embedding, doc_idx)
+        # Compute hybrid scores for all documents — vectorized for speed
+        n_docs = len(self.doc_nodes)
 
-            # SimRank score (structural similarity to query document).
-            # query_doc_idx and doc_idx are both indices into self.doc_nodes,
-            # which aligns with the SimRank matrix rows/columns.
-            simrank_score = self.compute_simrank_score(query_doc_idx, doc_idx)
+        # Embedding similarity: batch dot product against all doc embeddings
+        valid_emb = min(n_docs, len(self.embeddings))
+        emb_scores = np.zeros(n_docs, dtype=float)
+        emb_scores[:valid_emb] = self.embeddings[:valid_emb].dot(query_embedding)
 
-            # Horn's Index score (entity importance)
-            horn_score = self.compute_horn_score(doc_id, parsed_query)
+        # SimRank scores: single row lookup
+        if query_doc_idx < len(self.simrank_matrix):
+            simrank_row = self.simrank_matrix[query_doc_idx]
+            valid_sr = min(n_docs, len(simrank_row))
+            simrank_scores = np.zeros(n_docs, dtype=float)
+            simrank_scores[:valid_sr] = simrank_row[:valid_sr]
+        else:
+            simrank_scores = np.zeros(n_docs, dtype=float)
 
-            # Hybrid score (uses LTR-learned per-query-type weights when available)
-            hybrid_score = (
-                simrank_w * simrank_score +
-                horn_w * horn_score +
-                emb_w * emb_score
-            )
+        # Horn scores: computed per-doc (requires KG graph traversal)
+        horn_scores = np.array([
+            self.compute_horn_score(doc_id, parsed_query)
+            for doc_id in self.doc_nodes
+        ], dtype=float)
 
-            scores.append({
+        hybrid_scores = simrank_w * simrank_scores + horn_w * horn_scores + emb_w * emb_scores
+
+        scores = [
+            {
                 'doc_id': doc_id,
                 'doc_idx': doc_idx,
-                'hybrid_score': hybrid_score,
-                'simrank_score': simrank_score,
-                'horn_score': horn_score,
-                'embedding_score': emb_score
-            })
+                'hybrid_score': float(hybrid_scores[doc_idx]),
+                'simrank_score': float(simrank_scores[doc_idx]),
+                'horn_score': float(horn_scores[doc_idx]),
+                'embedding_score': float(emb_scores[doc_idx]),
+            }
+            for doc_idx, doc_id in enumerate(self.doc_nodes)
+        ]
 
         # Compute LTR scores in batch if a model is loaded
         if self._ltr_model is not None:

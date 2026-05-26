@@ -226,6 +226,10 @@ data/evaluation/**/*.pkl
 !data/evaluation/*.json
 !data/evaluation/README.md
 
+# Cleaned/processed corpus (large text files, regenerate from pipeline)
+data/cleaned data/
+data/balanced/texts/
+
 # Keep metadata and config files
 !data/metadata/
 !data/balanced/
@@ -424,6 +428,10 @@ CHANGELOG.md
 # Delivery documents (optional - keep in repo or not)
 *DELIVERY*.md
 *COMPLETE*.md
+
+# Dev notes and secondary docs
+starting.md
+README_STREAMLIT.md
 
 # Contrast fixes doc (optional)
 CONTRAST_FIXES_APPLIED.md

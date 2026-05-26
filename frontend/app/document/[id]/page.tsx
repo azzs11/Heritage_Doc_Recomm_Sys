@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import EntityTag from "@/components/knowledge-graph/EntityTag";
 import RelatedEntitiesPanel from "@/components/knowledge-graph/RelatedEntitiesPanel";
 import GraphViewer from "@/components/knowledge-graph/GraphViewer";
@@ -59,7 +60,7 @@ async function DocumentContent({ id }: { id: string }) {
               <div className="flex flex-wrap gap-2 text-sm text-gray-500 mb-3 capitalize">
                 {doc.type && <span className="px-2 py-0.5 bg-parchment-200 rounded text-xs">{doc.type}</span>}
                 {doc.era && <span className="px-2 py-0.5 bg-parchment-200 rounded text-xs">{doc.era}</span>}
-                {doc.region && <span className="px-2 py-0.5 bg-parchment-200 rounded text-xs">{doc.region} India</span>}
+                {doc.region && <span className="px-2 py-0.5 bg-parchment-200 rounded text-xs">{doc.region}</span>}
               </div>
               {doc.url && (
                 <a href={doc.url} target="_blank" rel="noopener noreferrer"
@@ -77,9 +78,13 @@ async function DocumentContent({ id }: { id: string }) {
             <h2 className="section-title">Keywords</h2>
             <div className="flex flex-wrap gap-2">
               {doc.keywords.map((kw) => (
-                <span key={kw} className="px-2.5 py-1 bg-parchment-200 border border-parchment-300 rounded-full text-xs text-heritage-dark">
+                <Link
+                  key={kw}
+                  href={`/search?q=${encodeURIComponent(kw)}`}
+                  className="px-2.5 py-1 bg-parchment-200 border border-parchment-300 rounded-full text-xs text-heritage-dark hover:bg-parchment-300 transition-colors"
+                >
                   {kw}
-                </span>
+                </Link>
               ))}
             </div>
           </div>
@@ -125,7 +130,7 @@ async function DocumentContent({ id }: { id: string }) {
               ["Domain", doc.classifications?.domains?.filter(d => d.toLowerCase() !== "unknown").join(", ")],
               ["Style", doc.classifications?.architectural_styles?.filter(s => s.toLowerCase() !== "unknown").join(", ")],
               ["Period", doc.era],
-              ["Region", doc.region ? `${doc.region} India` : null],
+              ["Region", doc.region ?? null],
               ["Words", doc.word_count?.toLocaleString()],
             ]
               .filter(([, v]) => v && String(v).toLowerCase() !== "unknown")

@@ -10,7 +10,15 @@ export default function SavedPage() {
   useEffect(() => {
     try {
       const stored = localStorage.getItem("heritage_saved_docs");
-      if (stored) setSaved(JSON.parse(stored));
+      if (stored) {
+        const parsed: Document[] = JSON.parse(stored);
+        // Purge entries with stale doc_N ids from before the id fix
+        const valid = parsed.filter((d) => !/^doc_\d+$/.test(d.id));
+        if (valid.length !== parsed.length) {
+          localStorage.setItem("heritage_saved_docs", JSON.stringify(valid));
+        }
+        setSaved(valid);
+      }
     } catch { /* ignore */ }
   }, []);
 
