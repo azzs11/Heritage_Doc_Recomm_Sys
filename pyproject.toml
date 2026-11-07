@@ -1,0 +1,82 @@
+[project]
+name = "heritage-doc-recomm-sys"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    # Data processing
+    "requests>=2.31",
+    "beautifulsoup4>=4.12",
+    "pandas>=2.1",
+    "numpy>=1.26,<3",          # 1.24.x has no Python 3.11/3.12 wheel
+    # NLP and embeddings
+    "nltk>=3.8",
+    "sentence-transformers>=2.2",
+    "transformers>=4.33",
+    "spacy>=3.7",
+    # Machine learning
+    "scikit-learn>=1.3",       # requirements.txt had wrong name "scikit-metrics"
+    "torch>=2.0",
+    # Graph
+    "networkx>=3.1",
+    # Visualisation
+    "matplotlib>=3.7",
+    "seaborn>=0.12",
+    "plotly>=5.18",
+    # Similarity search
+    "faiss-cpu>=1.7",
+    # Metaheuristic optimisation
+    "pyswarms>=1.3",
+    # Configuration
+    "pyyaml>=6.0",
+    # Web UI
+    "streamlit>=1.29",
+    # API
+    "fastapi>=0.104",
+    "uvicorn>=0.24",
+    "slowapi>=0.1",
+    "httpx>=0.25",             # required by FastAPI TestClient
+    # Utilities
+    "tqdm>=4.66",
+    "python-dotenv>=1.0",
+    "wikipedia>=1.4",
+    # Dropped from requirements.txt:
+    #   scikit-metrics   — does not exist on PyPI; replaced by scikit-learn above
+    #   nlpaug           — used only for synthetic augmentation (superseded)
+    #   deep-translator  — used only for synthetic augmentation (superseded)
+    #   gradio           — not used in the current codebase
+    #   imbalanced-learn — used only in the balancing step (superseded)
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.4",
+    "pytest>=8",
+    "pre-commit>=3.7",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = [
+    "E501",   # line too long — too many existing violations; fix separately
+]
+
+[tool.ruff.lint.per-file-ignores]
+# api/main.py uses sys.path manipulation before imports (intentional);
+# import ordering and E402 are suppressed until a dedicated refactor/ branch.
+"api/main.py" = ["E402", "I001", "F841"]
+# Pre-existing test files: suppress until they are individually refactored.
+"tests/test_recommender.py"               = ["E402", "I001", "F541"]
+"tests/system_check.py"                   = ["E402", "I001", "F401", "F541", "F841"]
+"tests/test_production_infrastructure.py" = ["F401", "F841", "I001"]
+"tests/test_monitoring_demo.py"           = ["E402", "I001", "F401", "F541", "F811", "F841"]
+"tests/test_concept_similarity.py"        = ["E302", "E722", "F401", "F841", "I001"]
+
+[tool.uv]
+package = false   # research project, not an installable package
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
