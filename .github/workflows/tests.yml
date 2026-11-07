@@ -1,95 +1,35 @@
-name: Run Tests
+name: CI
 
-# When to run this workflow
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  test:
-    name: Test Python Code
-    runs-on: ubuntu-latest
-
-    steps:
-      # Step 1: Get the code
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # Step 2: Set up Python
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.9'
-          cache: 'pip'
-
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pytest pytest-cov
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-      # Step 4: Run tests
-      - name: Run tests
-        run: |
-          if [ -d "tests" ]; then
-            pytest tests/ -v --cov=. --cov-report=term-missing --cov-report=xml
-          else
-            echo "No tests directory found, skipping tests"
-          fi
-
-      # Step 5: Upload coverage reports
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        if: always()
-        with:
-          file: ./coverage.xml
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: false
-
-      # Step 6: Check code can be imported
-      - name: Check imports
-        run: |
-          python -c "import sys; import os; print('Python version:', sys.version); print('Current directory:', os.getcwd()); print('Code structure OK')"
-
   lint:
-    name: Code Quality Check
+    name: Lint
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      # src/ has ~320 pre-existing violations; fix those in a separate refactor/ branch.
+      # Until then, enforce lint only on the directories we actively maintain.
+      - name: Run ruff check
+        run: uvx ruff check api/ tests/
+      - name: Run ruff format check
+        run: uvx ruff format --check api/ tests/
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
-
-      - name: Install linting tools
-        run: |
-          pip install flake8 pylint
-
-      - name: Run flake8 on src directory
-        run: |
-          # Check for critical errors only, don't fail the build
-          flake8 src --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=venv,__pycache__,.git || true
-        continue-on-error: true
-
-      - name: Run flake8 on utils directory
-        run: |
-          flake8 utils --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=venv,__pycache__,.git || true
-        continue-on-error: true
-
-      - name: Run flake8 on tests directory
-        run: |
-          flake8 tests --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=venv,__pycache__,.git || true
-        continue-on-error: true
-
-      - name: Code style check (informational)
-        run: |
-          # Full style check, exit-zero means it won't fail the build
-          flake8 src utils tests --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --exclude=venv,__pycache__,.git || true
-        continue-on-error: true
+          python-version: "3.11"
+      - name: Install dev dependencies only
+        run: uv sync --only-group dev --frozen
+      - name: Run tests
+        run: uv run --group dev pytest tests/ -q
