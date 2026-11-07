@@ -847,27 +847,6 @@ def search(request: Request, req: SearchRequest):
 
     docs = [enrich_result(r, use_ensemble=use_ensemble) for r in results]
 
-    # ── Taj Mahal pin: ensure real DB docs surface first ─────────────────
-    _TAJ_TRIGGERS = {"taj mahal", "tajmahal", "taj"}
-    if req.query.strip().lower() in _TAJ_TRIGGERS:
-        classified = getattr(app.state, "classified", {})
-        _taj_titles = ["Taj Mahal", "Shah Jahan"]
-        _taj_pinned = []
-        for _t in _taj_titles:
-            _meta = classified.get(_t)
-            if _meta:
-                _taj_pinned.append(enrich_result({
-                    "title": _t,
-                    "hybrid_score": 1.0 if _t == "Taj Mahal" else 0.95,
-                    "component_scores": {"simrank": 1.0, "horn": 0.92, "embedding": 0.97}
-                    if _t == "Taj Mahal" else {"simrank": 0.88, "horn": 0.85, "embedding": 0.91},
-                    "kg_explanations": ["Primary subject: exact match"] if _t == "Taj Mahal" else None,
-                }))
-        if _taj_pinned:
-            _pinned_titles = {d.title for d in _taj_pinned}
-            _remaining = [d for d in docs if d.title not in _pinned_titles]
-            docs = _taj_pinned + _remaining[: max(0, req.top_k - len(_taj_pinned))]
-
     return SearchResponse(
         query=req.query,
         total=len(docs),
