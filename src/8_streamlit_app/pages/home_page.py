@@ -3,10 +3,11 @@ Home Page / Dashboard
 Modern 2025 UI with Heritage Color Palette
 """
 
-import streamlit as st
 import json
-import plotly.graph_objects as go
 from pathlib import Path
+
+import plotly.graph_objects as go
+import streamlit as st
 
 
 # Load CSS
@@ -20,49 +21,47 @@ def load_css():
 
 @st.cache_data
 def load_system_stats():
-    """Load system statistics."""
+    """Load system statistics from generated files; return None for any value not found."""
     stats = {
-        'total_documents': 369,
-        'kg_nodes': 500,
-        'kg_edges': 6500,
-        'clusters': 12,
-        'best_precision': 0.828,
-        'best_method': 'Hybrid (50-50)',
-        'avg_latency': 0.21,
-        'coverage': 0.878
+        'total_documents': None,
+        'kg_nodes': None,
+        'kg_edges': None,
+        'clusters': None,
+        'best_precision': None,
+        'best_method': None,
+        'avg_latency': None,
+        'coverage': None,
     }
 
-    # Try to load actual stats
     try:
         with open('knowledge_graph/kg_statistics.json', 'r') as f:
             kg_stats = json.load(f)
-            stats['kg_nodes'] = kg_stats.get('total_nodes', 500)
-            stats['kg_edges'] = kg_stats.get('total_edges', 6500)
-    except:
+        stats['kg_nodes'] = kg_stats.get('total_nodes')
+        stats['kg_edges'] = kg_stats.get('total_edges')
+        doc_node_count = kg_stats.get('node_types', {}).get('document')
+        if doc_node_count is not None:
+            stats['total_documents'] = doc_node_count
+    except (FileNotFoundError, KeyError, json.JSONDecodeError):
         pass
 
     try:
         with open('results/method_comparison.json', 'r') as f:
             comparison = json.load(f)
-            methods = comparison.get('methods', {})
-
-            if methods:
-                best_precision = 0
-                best_method_name = ''
-
-                for method, metrics in methods.items():
-                    p5 = metrics.get('precision@5', 0)
-                    if p5 > best_precision:
-                        best_precision = p5
-                        best_method_name = method
-
-                stats['best_precision'] = best_precision
-                stats['best_method'] = best_method_name
-
-                latencies = [m.get('query_latency_ms', 0) for m in methods.values()]
-                if latencies:
-                    stats['avg_latency'] = sum(latencies) / len(latencies)
-    except:
+        methods = comparison.get('methods', {})
+        if methods:
+            best_precision = 0.0
+            best_method_name = None
+            for method, metrics in methods.items():
+                p5 = metrics.get('precision@5', 0)
+                if p5 > best_precision:
+                    best_precision = p5
+                    best_method_name = method
+            stats['best_precision'] = best_precision
+            stats['best_method'] = best_method_name
+            latencies = [m.get('query_latency_ms', 0) for m in methods.values()]
+            if latencies:
+                stats['avg_latency'] = sum(latencies) / len(latencies)
+    except (FileNotFoundError, KeyError, json.JSONDecodeError):
         pass
 
     return stats
