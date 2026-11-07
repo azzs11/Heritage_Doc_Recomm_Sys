@@ -3,7 +3,18 @@ About Page
 Information about the system, methodology, and team
 """
 
+import json
+
 import streamlit as st
+
+
+def _load_kg_stats() -> dict:
+    """Return kg_statistics.json contents, or an empty dict on failure."""
+    try:
+        with open("knowledge_graph/kg_statistics.json") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
 
 
 def render():
@@ -28,48 +39,54 @@ def render():
     
     with tab1:
         st.markdown("## System Overview")
-        
-        st.markdown("""
+
+        kg = _load_kg_stats()
+        node_types = kg.get("node_types", {})
+        n_docs = node_types.get("document", "—")
+        n_nodes = kg.get("total_nodes", "—")
+        n_edges = kg.get("total_edges", "—")
+
+        st.markdown(f"""
         ### 🎯 Purpose
-        
+
         Heritage documents are scattered across multiple sources and lack unified search capabilities.
         This system addresses the challenge by:
-        
+
         - **Aggregating** heritage documents from diverse sources
         - **Organizing** documents using semantic clustering and knowledge graphs
         - **Recommending** relevant documents based on user queries
         - **Explaining** recommendations through graph-based reasoning
-        
+
         ### 📚 Dataset
-        
-        - **Total Documents**: 369 heritage documents
+
+        - **Total Documents**: {n_docs} heritage documents
         - **Sources**: Wikipedia, UNESCO World Heritage, Indian Heritage, Archive.org
         - **Coverage**: Global heritage sites with focus on Indian monuments
         - **Clusters**: 12 thematic clusters (temples, forts, palaces, etc.)
-        
+
         ### 🕸️ Knowledge Graph
-        
-        - **Nodes**: ~500+ entities
-          - Documents (369)
+
+        - **Nodes**: {n_nodes} entities
+          - Documents ({n_docs})
           - Locations (cities, states, regions)
           - Persons (historical figures, architects)
           - Organizations (ASI, UNESCO)
           - Concepts (heritage types, domains, time periods)
-        
-        - **Edges**: ~6,500+ relationships
+
+        - **Edges**: {n_edges} relationships
           - Document similarities
           - Entity mentions
           - Semantic relationships
           - Temporal/spatial connections
-        
+
         ### 🎨 Features
-        
-        ✅ Natural language query processing  
-        ✅ Hybrid ranking (SimRank + Horn's Index + Embeddings)  
-        ✅ Interactive knowledge graph visualization  
-        ✅ Explainable recommendations with KG paths  
-        ✅ Real-time search (<1ms latency)  
-        ✅ Comprehensive evaluation metrics  
+
+        ✅ Natural language query processing
+        ✅ Hybrid ranking (SimRank + Horn's Index + Embeddings)
+        ✅ Interactive knowledge graph visualization
+        ✅ Explainable recommendations with KG paths
+        ✅ Real-time search (<1ms latency)
+        ✅ Comprehensive evaluation metrics
         """)
     
     with tab2:
