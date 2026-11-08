@@ -57,15 +57,6 @@ models:
     max_iterations: 30
     explosion_amplitude: 0.8
 
-# Data Balancing
-balancing:
-  target_samples_per_cluster: 35
-  augmentation_methods:
-    - "synonym_replacement"
-    - "back_translation"
-    - "paraphrase"
-  min_cluster_size: 15
-
 # Ranking Configuration
 ranking:
   simrank_weight: 0.4
