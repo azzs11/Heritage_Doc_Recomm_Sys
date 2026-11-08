@@ -275,8 +275,9 @@ def probe_internet_archive() -> None:
 
 def probe_met() -> None:
     print("Met Museum: Indian objects count...")
+    # v1 deprecated October 2026 (returns 410); use v1.1
     r = requests.get(
-        "https://collectionapi.metmuseum.org/public/collection/v1/search",
+        "https://collectionapi.metmuseum.org/public/collection/v1.1/search",
         params={"q": "India", "departmentId": "6", "isPublicDomain": "true"},
         headers=HEADERS,
         timeout=30,
@@ -285,7 +286,7 @@ def probe_met() -> None:
     total = r.json().get("total", 0)
     save("met", {
         "query": "q=India&departmentId=6&isPublicDomain=true",
-        "endpoint": "https://collectionapi.metmuseum.org/public/collection/v1/search",
+        "endpoint": "https://collectionapi.metmuseum.org/public/collection/v1.1/search",
         "total": total,
     })
 
